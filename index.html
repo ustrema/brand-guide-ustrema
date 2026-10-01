@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ustrema — Interactive Brand Guide v9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700&family=Onest:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&family=Unbounded:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Sofia+Sans:wght@400;500;600;700&family=Sofia+Sans+Semi+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#161A33; --ink2:#252A4A; --paper:#F4F1EA; --signal:#FF5A1F; --signalDeep:#D2410E; --slate:#5C6378; --mist:#E6E2D8; --white:#FFFFFF;
+  --display:'Geologica',system-ui,sans-serif; --text:'Onest',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
+  --ok:#1E8E5A; --warn:#E0A100; --err:#C62F2F; --info:#3A63C9;
+  --r:14px; --side:268px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3,h4{font-family:var(--display);letter-spacing:-.025em;line-height:1.08;margin:0 0 .5em}
+h2{font-size:clamp(34px,4.2vw,56px);font-weight:600}
+h3{font-size:22px;font-weight:600;margin-top:1.4em}
+h4{font-size:15px;font-weight:600;letter-spacing:0;text-transform:uppercase;color:var(--slate);margin:1.4em 0 .6em}
+p{max-width:72ch}
+code,.mono{font-family:var(--mono);font-size:.86em}
+small{color:var(--slate)}
+/* layout */
+nav.side{position:fixed;inset:0 auto 0 0;width:var(--side);background:var(--ink);color:var(--paper);padding:26px 20px;overflow:auto;z-index:20}
+nav.side .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:600;font-size:24px;letter-spacing:-.035em;margin-bottom:6px}
+nav.side .ver{font-size:12px;opacity:.6;margin-bottom:22px}
+nav.side a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;padding:7px 10px;border-radius:8px;font-size:14px;opacity:.78}
+nav.side a:hover,nav.side a.on{opacity:1;background:rgba(255,255,255,.08)}
+nav.side .ctrl{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)}
+nav.side .ctrl label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.6;margin:12px 0 6px}
+nav.side select,nav.side button{width:100%;font:inherit;font-size:13px;padding:8px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:var(--paper);cursor:pointer}
+nav.side select option{color:#000}
+main{margin-left:var(--side)}
+section{padding:96px 7vw 72px;border-bottom:1px solid rgba(22,26,51,.08);position:relative}
+section.dark{background:var(--ink);color:var(--paper)}
+section.dark small,section.dark h4{color:rgba(244,241,234,.6)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--signalDeep);margin-bottom:14px;display:flex;gap:12px;align-items:center}
+section.dark .eyebrow{color:var(--signal)}
+.lead{font-size:20px;line-height:1.5;max-width:64ch;color:var(--slate)}
+section.dark .lead{color:rgba(244,241,234,.75)}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1100px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){nav.side{display:none}main{margin-left:0}.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--white);border:1px solid rgba(22,26,51,.08);border-radius:var(--r);padding:22px}
+section.dark .card{background:var(--ink2);border-color:rgba(255,255,255,.08)}
+.card h3{margin-top:0}
+.pill{display:inline-block;font-size:12px;font-family:var(--mono);padding:3px 9px;border-radius:99px;background:var(--mist);color:var(--ink);margin:2px 4px 2px 0}
+.pill.sig{background:var(--signal);color:var(--onSignal)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid rgba(22,26,51,.08);vertical-align:top}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--slate);font-weight:500}
+section.dark th,section.dark td{border-color:rgba(255,255,255,.08)}
+.tablewrap{overflow:auto;border-radius:var(--r);background:var(--white);border:1px solid rgba(22,26,51,.08)}
+.btn{font:inherit;font-weight:600;font-size:15px;padding:12px 20px;border-radius:10px;border:0;cursor:pointer;display:inline-flex;gap:8px;align-items:center;text-decoration:none}
+.btn.primary{background:var(--signal);color:var(--onSignal)}
+.btn.primary:hover{background:var(--signalDeep);color:#fff}
+.btn.secondary{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor}
+.btn.ghost{background:var(--mist);color:var(--ink)}
+.seg{display:inline-flex;background:var(--mist);border-radius:10px;padding:4px;gap:4px;flex-wrap:wrap}
+.seg button{font:inherit;font-size:13px;font-weight:500;border:0;background:transparent;padding:7px 12px;border-radius:7px;cursor:pointer;color:var(--ink)}
+.seg button.on{background:var(--white);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+section.dark .seg{background:rgba(255,255,255,.08)}section.dark .seg button{color:var(--paper)}section.dark .seg button.on{background:var(--paper);color:var(--ink)}
+.rails-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden;opacity:.5}
+/* cover */
+#cover{min-height:min(100vh,920px);display:flex;flex-direction:column;justify-content:space-between;background:var(--ink);color:var(--paper);padding-top:72px;overflow:hidden}
+#cover h1{font-size:clamp(64px,10vw,150px);font-weight:600;letter-spacing:-.05em;margin:0}
+#cover .tag{font-family:var(--display);font-size:clamp(24px,3vw,40px);font-weight:300;letter-spacing:-.02em;color:rgba(244,241,234,.85)}
+#cover .tag b{color:var(--signal);font-weight:500}
+.meta-row{display:flex;gap:40px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(244,241,234,.6)}
+.meta-row b{display:block;color:var(--paper);font-weight:500;margin-top:4px}
+/* swatches */
+.sw{border-radius:var(--r);overflow:hidden;border:1px solid rgba(22,26,51,.1);background:var(--white);cursor:pointer}
+.sw .chip{height:150px;display:flex;align-items:flex-end;padding:14px;font-family:var(--display);font-weight:600;font-size:20px}
+.sw .info{padding:12px 14px;font-family:var(--mono);font-size:12px;line-height:1.7}
+.ratio{display:flex;height:56px;border-radius:var(--r);overflow:hidden;margin:18px 0;border:1px solid var(--mist)}
+.ratio div{display:flex;align-items:flex-end;padding:8px 10px;font-family:var(--mono);font-size:11px}
+/* logo */
+.logo-stage{border-radius:var(--r);min-height:260px;display:flex;align-items:center;justify-content:center;position:relative;padding:40px}
+.logo-stage.clear .cs{display:block}
+.cs{display:none;position:absolute;inset:0;pointer-events:none}
+.misuse{position:relative}
+.misuse::after{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - 1.5px),var(--err) calc(50% - 1.5px),var(--err) calc(50% + 1.5px),transparent calc(50% + 1.5px))}
+/* type */
+.tester{font-family:var(--display);font-size:64px;line-height:1.05;letter-spacing:-.035em;outline:none;border-radius:var(--r);padding:24px;background:var(--white);border:1px solid rgba(22,26,51,.08);min-height:120px}
+.scale-row{display:grid;grid-template-columns:120px 1fr;gap:18px;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(22,26,51,.08)}
+/* mock browser */
+.browser{border-radius:16px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(22,26,51,.45);border:1px solid rgba(22,26,51,.12);background:var(--paper)}
+.browser .bar{height:38px;background:#e9e5dc;display:flex;align-items:center;gap:7px;padding:0 14px}
+.browser .bar i{width:11px;height:11px;border-radius:50%;background:#cfc9bd}
+.browser .bar span{margin-left:14px;font-family:var(--mono);font-size:12px;color:var(--slate);background:#f6f3ed;padding:4px 12px;border-radius:6px}
+.mock-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 40px;font-size:14px}
+.mock-nav .links{display:flex;gap:26px;color:var(--slate)}
+.mock-hero{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;padding:40px 40px 60px;align-items:center;position:relative}
+.mock-hero h1{font-size:clamp(40px,4.6vw,68px);font-weight:600;letter-spacing:-.045em;margin:0 0 18px}
+.scan-card{background:var(--ink);color:var(--paper);border-radius:18px;padding:22px;font-size:13px;box-shadow:0 24px 60px -20px rgba(22,26,51,.6)}
+.scan-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.bar-meter{height:6px;border-radius:9px;background:rgba(255,255,255,.12);overflow:hidden;width:120px}
+.bar-meter b{display:block;height:100%;background:var(--signal)}
+@media(max-width:1250px){.mock-hero{grid-template-columns:1fr}.mock-nav .links{display:none}}
+.btn{white-space:nowrap}
+.browser.dark{background:var(--ink);color:var(--paper);border-color:rgba(255,255,255,.08)}.browser.dark .bar{background:#1b1f27}.browser.dark .bar span{background:#252a33;color:rgba(245,245,245,.6)}.browser.dark .bar i{background:#3a404b}.browser.dark .mock-nav .links{color:rgba(245,245,245,.65)}.browser.dark .lead{color:rgba(245,245,245,.72)}.browser.dark .eyebrow{color:var(--signal)}.browser.dark .btn.secondary{color:var(--paper)}.browser.dark .scan-card{background:var(--ink2);box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+.cursor{animation:blink 1.05s steps(1) infinite}@keyframes blink{50%{opacity:0}}
+.vtag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:99px;margin-right:6px}
+.vtag.short{background:var(--signal);color:var(--onSignal)}.vtag.park{background:#E0A100;color:#2b1f00}.vtag.rej{background:#C62F2F;color:#fff}.vtag.rec{background:#3ecf8e;color:#08311f}
+.xb{background:var(--ink);color:var(--paper);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.xb .sizes{display:flex;gap:10px;align-items:center;background:var(--paper);border-radius:8px;padding:8px}
+.outl path,.outl rect,.outl circle{fill:none!important;stroke:var(--ink)!important;stroke-width:1.5!important}
+/* competitor */
+.comp-card{display:flex;flex-direction:column;gap:8px}
+.comp-card .top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.comp-card .sw-row{display:flex;gap:4px}
+.comp-card .sw-row i{width:18px;height:18px;border-radius:5px;border:1px solid rgba(0,0,0,.1)}
+.filter-row{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+#map svg text{font-family:var(--text)}
+.tooltip{position:fixed;pointer-events:none;background:var(--ink);color:var(--paper);padding:10px 12px;border-radius:10px;font-size:13px;max-width:280px;z-index:99;opacity:0;transition:opacity .12s}
+/* sitemap */
+.tree{font-family:var(--mono);font-size:13px;line-height:1.9;background:var(--white);border-radius:var(--r);padding:22px;border:1px solid rgba(22,26,51,.08);white-space:pre;overflow:auto}
+.vote{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:12px;background:var(--white);border:1.5px solid transparent;cursor:pointer;margin-bottom:10px}
+.vote.on{border-color:var(--signal)}
+.vote .en{font-family:var(--display);font-size:24px;font-weight:600;letter-spacing:-.025em}
+.vote .bg{color:var(--slate)}
+.vote .star{margin-left:auto;font-size:22px;color:var(--signal);opacity:.2}
+.vote.on .star{opacity:1}
+.do,.dont{border-radius:var(--r);padding:18px;background:var(--white);border-top:4px solid var(--ok)}
+.dont{border-top-color:var(--err)}
+.do b,.dont b{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.do b{color:var(--ok)}.dont b{color:var(--err)}
+.toast{position:fixed;bottom:22px;right:22px;background:var(--ink);color:var(--paper);padding:12px 16px;border-radius:10px;font-size:14px;opacity:0;transition:.2s;z-index:99}
+.toast.on{opacity:1}
+.kpi{font-family:var(--display);font-size:46px;font-weight:600;letter-spacing:-.04em;line-height:1}
+.note{background:color-mix(in srgb,var(--signal) 10%,transparent);border-left:3px solid var(--signal);padding:12px 16px;border-radius:0 10px 10px 0;margin:16px 0;max-width:80ch}
+section.dark .note{background:color-mix(in srgb,var(--signal) 14%,transparent)}
+</style>
+</head>
+<body>
+
+<nav class="side" id="side">
+  <div class="brand"><span id="navMark"></span>ustrema</div>
+  <div class="ver">Brand guide v9 · draft · 1 Oct 2026</div>
+  <div id="navLinks"></div>
+  <div class="ctrl">
+    <label>Colour direction</label>
+    <select id="palSel"></select>
+    <label>Logo concept</label>
+    <select id="logoSel"></select>
+    <label>Type pairing</label>
+    <select id="typeSel"></select>
+  </div>
+</nav>
+
+<main id="main">
+
+<!-- ============ COVER ============ -->
+<section id="cover" data-title="Cover" data-nodecide>
+  <div class="rails-bg" id="coverRails"></div>
+  <div style="position:relative">
+    <div class="eyebrow">Brand guide · v9 draft · preferred marks</div>
+    <div style="display:flex;align-items:center;gap:28px;margin-top:40px" id="coverLockup"></div>
+  </div>
+  <div style="position:relative">
+    <div class="tag">Momentum <b>with direction.</b><br><span style="opacity:.55">Устрем с посока.</span></div>
+    <div class="meta-row" style="margin-top:56px">
+      <div>Company<b>УСТРЕМА ООД · USTREMA LTD</b></div>
+      <div>Practice<b>Microsoft Power Platform · Governance · Copilot · Dynamics 365</b></div>
+      <div>Domain<b>ustrema.com</b></div>
+      <div>Status<b>Draft for discussion</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW TO USE ============ -->
+<section id="howto" data-title="How to use this guide" data-nodecide>
+  <div class="eyebrow">00 · How to use</div>
+  <h2>An interactive guide, built for a discussion.</h2>
+  <p class="lead">Every option shown here is live. Switch colour schemes, logo marks and type pairings in the sidebar and the whole guide re-themes, so each combination can be judged in context: logo, colour, type, applications and website direction together.</p>
+  <div class="grid g3" style="margin-top:28px">
+    <div class="card"><h4 style="margin-top:0">Recommended set (v8)</h4><p style="margin:0">Colour <b>O · Ink, Bone &amp; Signal Fuchsia</b>, logo <b>your Mark 04 / 01 / 03</b>, type <b>Manrope + Onest</b>. This is the default view.</p></div>
+    <div class="card" style="display:none"><h4 style="margin-top:0">Research</h4><p style="margin:0">See <code>02-market-research/</code>: Bulgarian and regional competitors, international benchmarks, website teardown with screenshots, Microsoft partner and brand rules.</p></div>
+    <div class="card"><h4 style="margin-top:0">Not in scope yet</h4><p style="margin:0">The website itself. Section 15 has the scope, sitemap and offers so the build can start from agreed decisions.</p></div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- ============ NAME ============ -->
+<section id="name" class="dark" data-title="The name">
+  <div class="eyebrow">01 · The name</div>
+  <h2>Устрем — drive, impetus, forward rush.</h2>
+  <p class="lead">A real Bulgarian word that local buyers recognise instantly, and that sounds smooth and abstract to EU and US buyers, the same trick that works for Sirma and Musala. The name holds half the brand idea by itself. The other half, <i>direction</i>, is what Ustrema sells.</p>
+  <div class="grid g3" style="margin-top:34px">
+    <div class="card"><h4 style="margin-top:0">Say it</h4><div class="kpi">oo-STREH-mah</div><p><small>BG: у-СТРЕ-ма. Stress on the 2nd syllable.</small></p><button class="btn secondary" id="sayBtn" style="color:var(--paper)">▶ Hear it (browser voice)</button></div>
+    <div class="card"><h4 style="margin-top:0">Write it</h4><p style="margin:0">Logotype (v2): title-case <b>Ustrema</b> in Manrope 800, with Cyrillic <b>Устрема</b> as the bilingual line. Digital signature version: <b>Ustrema_</b> (blinking cursor).<br>Legal: <b>УСТРЕМА ООД</b> / <b>USTREMA LTD</b>.<br>In running text: <b>Ustrema</b> / <b>Устрема</b>. Never <s>USTREMA</s> in body copy, because it reads as an acronym.</p></div>
+    <div class="card"><h4 style="margin-top:0">The tension it carries</h4><p style="margin:0">Power Platform gives every employee <i>устрем</i>. Without direction, that becomes sprawl, data exposure and risk. <b>Ustrema = the drive, plus the direction.</b></p></div>
+  </div>
+  <div class="note">Watch-out: some EN speakers will say "you-strema" or hear "extreme". Put a pronunciation line on the About page and in email signatures during year one. Don't change the spelling.</div>
+</section>
+
+<!-- ============ MARKET ============ -->
+<section id="market" data-title="Market landscape">
+  <div class="eyebrow">02 · What's on the market</div>
+  <h2>A crowded word, an empty corner.</h2>
+  <p class="lead" id="marketLead">63 Microsoft partners reviewed across Bulgaria, the region and international benchmarks. Bulgarian and regional Microsoft partners mostly sell <b>Dynamics ERP implementations</b> or <b>generic "digital transformation"</b>. Power Platform is an add-on line and governance is almost absent. Visually, the category is Microsoft-blue, stock photography and abstract network graphics.</p>
+  <div class="grid g4" id="marketKpis" style="margin:28px 0"></div>
+  
+  
+  <h3>Patterns we found, and how Ustrema answers them</h3>
+  <div class="tablewrap"><table id="patternTable"><thead><tr><th>Category pattern</th><th>Ustrema response</th></tr></thead><tbody></tbody></table></div>
+  
+</section>
+
+<!-- ============ POSITIONING ============ -->
+<section id="positioning" data-title="Positioning & audience">
+  <div class="eyebrow">03 · Positioning</div>
+  <h2>Power Platform, governed.<br>Then built to scale.</h2>
+  <div class="card" style="margin-top:24px;font-size:18px;line-height:1.6">
+    <b>For</b> mid-market and enterprise organisations in Bulgaria and the EU whose Power Platform and Copilot use has grown faster than anyone's control over it, <b>Ustrema is</b> the Power Platform specialist that <b>makes low-code and AI safe to scale</b>: governance first, then delivery. <b>Unlike</b> ERP houses that treat Power Platform as an add-on, or freelancers who leave tenants messier than they found them, <b>we</b> are senior, Microsoft-certified practitioners who have untangled live enterprise tenants, and we price transparently.
+  </div>
+  <h3>Who we talk to</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Segment</th><th>Signs the deal</th><th>Trigger</th><th>What they need to hear</th></tr></thead>
+    <tbody>
+      <tr><td><b>A · Sprawl owners</b> <span class="pill sig">lead</span></td><td>CIO, Head of IT, Microsoft 365 platform owner</td><td>Copilot rollout, audit finding, citizen-dev app on sensitive data</td><td>"We'll show you what's in your tenant in 2–3 weeks and fix it without killing adoption."</td></tr>
+      <tr><td><b>B · Regulated</b></td><td>CISO, compliance, DPO (banks, insurers, public sector)</td><td>DORA / NIS2 / GDPR audit, Copilot go/no-go</td><td>Controls, evidence, Purview, SC-certified people, BG-language documentation</td></tr>
+      <tr><td><b>C · Builders</b></td><td>Business-unit heads, ops and finance directors</td><td>Excel/Access/email processes that hurt</td><td>Fast, owned apps and dashboards, built properly from day one</td></tr>
+      <tr><td><b>D · Dynamics users</b></td><td>CFO / COO on Business Central or Dynamics 365 Sales / Customer Service</td><td>Reporting gaps, a stuck partner</td><td>Power Platform extensions, Power BI on Dynamics 365, second opinions</td></tr>
+      <tr><td><b>E · Partners / SIs</b></td><td>Delivery leads at Microsoft SIs</td><td>Overflow, BG-language clients</td><td>Certified bench, subcontracting, white-label</td></tr>
+    </tbody></table></div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section id="pillars" class="dark" data-title="Pillars">
+  <div class="eyebrow">04 · Brand pillars</div>
+  <h2>Four things we prove, every time.</h2>
+  <div class="grid g4" style="margin-top:30px">
+    <div class="card"><div class="mono" style="color:var(--signal)">01 · Посока</div><h3>Direction</h3><p>Governance is how we start, not an afterthought. Every build ships with environments, DLP and ownership in place.</p><small>Proof: Governance Scan, public checklist</small></div>
+    <div class="card"><div class="mono" style="color:var(--signal)">02 · Устрем</div><h3>Momentum</h3><p>Weeks, not quarters. Small senior team, fixed-scope entry points, time-to-value in every case study.</p><small>Proof: fixed durations on every offer</small></div>
+    <div class="card"><div class="mono" style="color:var(--signal)">03 · Яснота</div><h3>Clarity</h3><p>No black-box SOWs. Named people, named tiers, published price anchors, plain-language reports.</p><small>Proof: rate tiers page, "how we scope"</small></div>
+    <div class="card"><div class="mono" style="color:var(--signal)">04 · Майсторство</div><h3>Certified craft</h3><p>Certified people (AB-400/410, PL-300, SC-300/401), not "Microsoft enthusiasts". Partner status stated honestly.</p><small>Proof: per-person certifications</small></div>
+  </div>
+</section>
+
+<!-- ============ VOICE ============ -->
+<section id="voice" data-title="Voice & tone">
+  <div class="eyebrow">05 · Voice</div>
+  <h2>A calm senior engineer who's seen your tenant before.</h2>
+  <p class="lead">Direct, specific, a bit dry, never alarmist. Plain language that stays technically exact.</p>
+  <div class="seg" id="voiceLang" style="margin:18px 0"><button data-v="en" class="on">English</button><button data-v="bg">Български</button></div>
+  <div class="grid g2" id="voicePairs"></div>
+  <h3>Voice dials</h3>
+  <div id="dials"></div>
+  <h3>Word bank</h3>
+  <div class="grid g2">
+    <div class="card"><h4 style="margin-top:0;color:var(--ok)">Use</h4><p>guardrails · direction · ownership · environment strategy · in production · weeks · evidence · посока · контрол · мащаб · собственост · седмици</p></div>
+    <div class="card"><h4 style="margin-top:0;color:var(--err)">Avoid</h4><p>synergy · leverage · cutting-edge · revolutionise · unlock the power of · seamless · end-to-end digital transformation · иновативни решения · лидер на пазара</p></div>
+  </div>
+  <div class="note">Microsoft naming: first mention uses the full name ("Microsoft Power Platform", "Microsoft Copilot Studio"), then the short form. Never "MS", never "PowerApps" as one word. BG sales copy addresses the reader as <b>Вие</b>.</div>
+</section>
+
+<!-- ============ MESSAGING ============ -->
+<section id="messaging" data-title="Messaging & taglines">
+  <div class="eyebrow">06 · Messaging</div>
+  <h2>One idea, three doors.</h2>
+  <div class="grid g3" style="margin-top:24px">
+    <div class="card"><div class="pill sig">Govern</div><h3>Know what's in your tenant. Fix it without stopping your makers.</h3><small>Governance Scan · Managed Environments · DLP · CoE</small></div>
+    <div class="card"><div class="pill sig">Build</div><h3>Apps, automations and dashboards built properly the first time.</h3><small>Power Apps · Power Automate · Dataverse · Power BI · D365</small></div>
+    <div class="card"><div class="pill sig">Scale with AI</div><h3>Copilot and agents that only see what they should.</h3><small>Copilot Studio · Purview · agent governance</small></div>
+  </div>
+  <h3>Tagline options</h3>
+  <div id="taglines"></div>
+  <h3>Elevator pitch</h3>
+  <div class="grid g2">
+    <div class="card"><h4 style="margin-top:0">EN · 30 sec</h4><p style="margin:0">"Most companies we meet have hundreds of Power Apps and flows in one default environment, some touching HR or finance data, and they're about to switch on Copilot. We map what's actually there in two to three weeks, add guardrails without stopping the people who build, and then help build what the business needs. Small senior team, certified, fixed-scope entry, Sofia-based, working across the EU."</p></div>
+    <div class="card"><h4 style="margin-top:0">BG · 30 сек</h4><p style="margin:0">„Повечето компании, с които работим, имат стотици Power Apps и потоци в една среда по подразбиране — някои от тях с достъп до HR или финансови данни — и всеки момент пускат Copilot. За две-три седмици картографираме какво реално има, поставяме предпазни релси, без да спираме хората, които създават, и после изграждаме това, от което бизнесът има нужда. Малък екип от сениори, сертифицирани, с ясен обхват и цена от първия ден."</p></div>
+  </div>
+</section>
+
+<!-- ============ LOGO ============ -->
+<section id="logo" data-title="Logo">
+  <div class="eyebrow">07 · Logo</div>
+  <h2>Currents inside a U.</h2>
+  <p class="lead" id="logoStory"></p>
+  <h3>Preferred marks</h3>
+  <p><small>Three preferred marks, normalised to the guide's 64-unit grid and optical size; Mark 03's grey background panel was removed. Everything below the line is the evidence trail of earlier rounds, now discarded.</small></p>
+  <div class="grid g3" id="prefBoard" style="margin:16px 0 26px"></div>
+  <details style="margin:0 0 12px"><summary style="cursor:pointer;font-weight:600">Archive · v7 exploration (21 Spear + meaning concepts, discarded)</summary><div class="grid g4" id="explore7" style="margin-top:16px"></div></details>
+  
+<details style="margin:0 0 12px"><summary style="cursor:pointer;font-weight:600">Archive · v6 exploration (24 Spear variants, rejected: too generic)</summary><div class="grid g4" id="explore6" style="margin-top:16px"></div></details>
+  
+<details style="margin:0 0 12px"><summary style="cursor:pointer;font-weight:600">Archive · v5 exploration (24 clean/oblique marks, rejected: italic)</summary><div class="grid g4" id="explore5" style="margin-top:16px"></div></details>
+  
+<details style="margin:0 0 12px"><summary style="cursor:pointer;font-weight:600">Archive · v4 exploration (26 symmetric marks, rejected: not clean enough)</summary><div class="grid g4" id="explore4" style="margin-top:16px"></div></details>
+  <details style="margin:0 0 12px"><summary style="cursor:pointer;font-weight:600">Archive · v3 exploration (17 cut-U marks, discarded)</summary><div class="grid g4" id="explore3" style="margin-top:16px"></div></details>
+  <details style="margin:0 0 30px"><summary style="cursor:pointer;font-weight:600">Archive · v2 exploration (12 arrow / aim marks, discarded)</summary><div class="grid g4" id="explore" style="margin-top:16px"></div></details>
+  <h3>Select a preferred mark (click to apply across the guide)</h3>
+  <div class="grid g4" id="logoConcepts" style="margin:16px 0 26px"></div>
+  <h3>Lockups</h3>
+  <div class="filter-row">
+    <div class="seg" id="lockSeg"><button data-v="bi" class="on">Bilingual (primary)</button><button data-v="h">Horizontal</button><button data-v="caps">Caps wordmark</button><button data-v="sig">Signal (cursor)</button><button data-v="s">Stacked</button><button data-v="i">Integrated (mark = "U")</button><button data-v="m">Mark only</button><button data-v="app">App icon</button><button data-v="cy">Cyrillic</button></div>
+    <div class="seg" id="bgSeg"><button data-v="ink" class="on">Obsidian</button><button data-v="paper">Fog</button><button data-v="signal">Signal</button><button data-v="white">White</button></div>
+    <div class="seg" id="csSeg"><button data-v="0" class="on">Clear space off</button><button data-v="1">Clear space on</button></div>
+  </div>
+  <div class="logo-stage" id="logoStage"></div>
+  <div class="grid g3" style="margin-top:22px">
+    <div class="card"><h4 style="margin-top:0">Clear space &amp; wordmark</h4><p style="margin:0">Clear space = the width of one arm (<b>x</b>) on all sides. Wordmark (unchanged from v2): <b>Ustrema</b> in Manrope 800, −3.5% tracking, cap height = 0.66 × mark height. The cursor "_" is for digital only (it blinks in motion) and is never used in print legal contexts.</p></div>
+    <div class="card"><h4 style="margin-top:0">Minimum size</h4><p style="margin:0">Horizontal lockup: 96 px / 24 mm wide. Mark only: 16 px (favicon), 6 mm print. Below 24 px, use the single-colour mark.</p></div>
+    <div class="card"><h4 style="margin-top:0">Colourways</h4><p style="margin:0">Ink + Signal on Paper/White · Paper + Signal on Ink · Ink on Signal (single colour) · pure black/white for fax-grade, engraving and embroidery.</p></div>
+  </div>
+  <h3>Sizes</h3>
+  <div class="card" id="logoSizes" style="display:flex;gap:40px;align-items:flex-end;flex-wrap:wrap"></div>
+  <h3>Misuse</h3>
+  <div class="grid g4" id="misuse"></div>
+</section>
+
+<!-- ============ COLOUR ============ -->
+<section id="colour" data-title="Colour">
+  <div class="eyebrow">08 · Colour</div>
+  <h2>Colour by psychology, placed by data.</h2>
+  <div class="grid g2" style="align-items:center;margin:10px 0 20px">
+    <div id="hueWheel"></div>
+    <div><h4 style="margin-top:0">How the palette was chosen</h4><p>Every chromatic brand colour from the 70 competitors in the research (sites, CSS and screenshots), plotted by hue. Outer bars show the count per 20° band; inner dots are the actual colours. Lettered dots are our candidate signals.</p>
+    <ul style="line-height:1.8;padding-left:20px;margin:0"><li><b>Blue 200–239°: 50 colours</b>, the category default, and Microsoft's own.</li><li><b>Red/orange 0–39°: 32</b>. The v1 vermilion lived here.</li><li><b>Cyan 180–199°: 8</b>, almost all pale sky-blue. Electric cyan on black: nobody.</li><li><b>Mint 140–170°</b>: taken by a close local competitor. Avoid.</li><li><b>Violet 280–300°: 0</b>. Empty, but trend-loaded.</li></ul></div>
+  </div>
+  <h3>Strategy first: blend in, bridge, or break?</h3>
+  <div class="grid g3" style="margin:12px 0 24px">
+    <div class="card"><div class="pill">Conform &amp; own</div><h3 style="margin-top:10px">Go with the blue majority</h3><p style="font-size:14px">Blue is the colour most strongly linked to <b>competence</b> in the research, and it's the ecosystem's native language. You trade memorability for instant trust. 50 of 135 competitor colours are blue, and the "best blue" rarely wins a three-way pitch comparison.</p><small>Scheme: B · Ultramarine</small></div>
+    <div class="card"><div class="pill">Bridge</div><h3 style="margin-top:10px">Trust language, own dialect</h3><p style="font-size:14px">Deep indigo or plum bases read as serious as navy at a glance; the accent moves to violet or cyan. Easy for conservative buyers, more ownable than blue. Risk: violet and cyan are both "AI/tech" defaults.</p><small>Schemes: I · Indigo &amp; Iris, P · Plum &amp; Cyan</small></div>
+    <div class="card" style="outline:2px solid var(--signal)"><div class="pill sig">Break (recommended)</div><h3 style="margin-top:10px">Be the one that isn't blue</h3><p style="font-size:14px">Earn trust through <b>restraint</b> (monochrome base, strong typography, real findings), not through hue. Spend the colour budget on one accent nobody in the category uses. Research suggests colour <i>fit</i> to the brand matters more than the specific hue.</p><small>Schemes: O · Fuchsia, M · Monochrome, X · Oxblood, Y · Saffron</small></div>
+  </div>
+  <h3>Psychological placement map</h3>
+  <div class="grid g2" style="align-items:center;margin-bottom:16px"><div id="placeMap" class="card" style="padding:8px"></div>
+  <div><p style="margin-top:0">x-axis: <b>category-conforming → distinctive</b>, measured against the 135-colour competitor map. y-axis: <b>calm/trust → energy</b>, from the psychological associations of hue, saturation and value.</p><p>The category crowds two places: <b>blue-calm</b> (the trust default) and <b>orange/red-energetic</b> (the CTA default). The upper right, <b>distinctive and energetic but still credible</b>, is empty. That is where an "устрем" brand should sit, and where Fuchsia lands.</p><p><small>Colour–trait links: blue → competence, red → excitement, purple and black → sophistication (Labrecque &amp; Milne, 2012, <i>Journal of the Academy of Marketing Science</i>). Colour–brand fit matters more than any single hue (Bottomley &amp; Doyle, 2006, <i>Marketing Theory</i>). Positions are analyst judgement, not measurement.</small></p></div></div>
+  <h3>Schemes ordered by psychological fit (click a row to apply)</h3>
+  <div class="tablewrap"><table id="scoreTable"></table></div>
+  <p><small>Weighted: competence 25%, excitement/momentum 20%, sophistication 15%, distinctiveness 25%, constraint safety 15%. Apricot was removed at your request. Rejected v1–v3 schemes are shown at the bottom for reference.</small></p>
+  <h3>Every scheme with the current mark</h3>
+  <div class="grid g4" id="palMatrix" style="margin-bottom:26px"></div>
+  <p class="lead" id="palStory"></p>
+  <div class="seg" id="palSeg" style="margin:16px 0 22px"></div>
+  <div class="grid g4" id="swatches"></div>
+  <h3>Proportion</h3>
+  <div class="ratio" id="ratio"></div>
+  <p><small>Signal is a spark, not a flood: CTAs, the logo chip, one highlight per view. Never large backgrounds outside campaign moments.</small></p>
+  <h3>Contrast (WCAG 2.2)</h3>
+  <div class="tablewrap"><table id="contrast"><thead><tr><th>Text on background</th><th>Sample</th><th>Ratio</th><th>Body (4.5)</th><th>Large (3.0)</th></tr></thead><tbody></tbody></table></div>
+  <h3>Functional &amp; data-viz colours</h3>
+  <div class="grid g2">
+    <div class="card"><h4 style="margin-top:0">States</h4><div id="states" style="display:flex;gap:10px;flex-wrap:wrap"></div></div>
+    <div class="card"><h4 style="margin-top:0">Charts (categorical order)</h4><div id="dataviz" style="display:flex;gap:6px"></div><small>Order matters: Ink first, Signal reserved for the "risk / highlight" series.</small></div>
+  </div>
+  <h3>Distinctness check</h3>
+  <div class="grid g3" id="groupPalettes"></div>
+</section>
+
+<!-- ============ TYPE ============ -->
+<section id="type" data-title="Typography">
+  <div class="eyebrow">09 · Typography</div>
+  <h2>Cyrillic-first, engineered, a little warm.</h2>
+  <p class="lead" id="typeStory"></p>
+  <div class="filter-row">
+    <div class="seg" id="typeSeg"></div>
+    <div class="seg" id="typeLang"><button data-v="en" class="on">EN</button><button data-v="bg">BG</button></div>
+  </div>
+  <div class="tester" contenteditable="true" id="tester" spellcheck="false">Momentum with direction.</div>
+  <p><small>Click the text to edit it. Try Cyrillic.</small></p>
+  <h3>Type scale (1.25 ratio, web)</h3>
+  <div id="scale"></div>
+  <div class="grid g3" style="margin-top:20px">
+    <div class="card"><h4 style="margin-top:0">Display</h4><p style="margin:0" id="tDisp"></p></div>
+    <div class="card"><h4 style="margin-top:0">Text</h4><p style="margin:0" id="tText"></p></div>
+    <div class="card"><h4 style="margin-top:0">Data / code</h4><p style="margin:0">JetBrains Mono for numbers in reports, tenant findings, code and eyebrow labels. Full Cyrillic.</p></div>
+  </div>
+  <div class="note">Do <b>not</b> use Segoe UI or Segoe-like system stacks as brand type. It's Microsoft's own typeface and makes us look like a Microsoft page.</div>
+</section>
+
+<!-- ============ GRAPHIC LANGUAGE ============ -->
+<section id="graphics" class="dark" data-title="Graphic language">
+  <div class="eyebrow">10 · Graphic language</div>
+  <h2>Slash, cursor, lock-on.</h2>
+  <p class="lead">Three devices carry the brand without stock imagery. All three come from the logo exploration: the <b>45° slash</b> from the spear tip, the <b>cursor</b> from the inspo wordmark, and the <b>lock-on frame</b> from exploration 11. The fourth is the <b>finding card</b>, real-looking tenant data that acts as our "photography".</p>
+  <div class="grid g4" style="margin-top:28px">
+    <div class="card"><h4 style="margin-top:0">45° Slash pattern</h4><div id="railsDemo" style="height:150px;border-radius:10px;overflow:hidden;background:var(--ink)"></div><small>Backgrounds, banners, section breaks. Always 45° (the tip angle). Max one signal slash per composition.</small></div>
+    <div class="card"><h4 style="margin-top:0">Cursor</h4><div style="height:150px;border-radius:10px;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:Manrope;font-weight:800;font-size:30px;letter-spacing:-.03em">Scan<span class="cursor" style="color:var(--signal)">_</span></div><small>Ends headlines and CTAs in digital, blinks once on load. It means "live, building, ready". Never more than one per screen.</small></div>
+    <div class="card"><h4 style="margin-top:0">Lock-on frame</h4><div style="height:150px;border-radius:10px;background:var(--ink);display:flex;align-items:center;justify-content:center"><div style="position:relative;padding:18px 26px;font-family:var(--mono);font-size:13px;color:var(--paper)">412 apps · default env<svg style="position:absolute;inset:0" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 100 40"><path d="M0 10V0H12M88 0H100V10M100 30V40H88M12 40H0V30" fill="none" stroke="var(--signal)" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg></div></div><small>Frames whatever we "found": findings, KPIs, screenshots. Owns the Governance Scan visually.</small></div>
+    <div class="card"><h4 style="margin-top:0">Finding card</h4><div class="scan-card" style="box-shadow:none"><div class="mono" style="opacity:.6;font-size:11px">FINDING · ENV-014</div><div style="font-family:Manrope;font-size:20px;font-weight:800;margin:6px 0;letter-spacing:-.02em">412 apps in the default environment</div><div style="display:flex;gap:6px"><span class="pill sig">High</span><span class="pill">Governance</span></div></div><small style="display:block;margin-top:8px">Shows the work, not handshakes.</small></div>
+  </div>
+  <h3>Iconography</h3>
+  <div class="card" style="display:flex;gap:28px;flex-wrap:wrap;align-items:center" id="icons"></div>
+  <p><small>Line icons, 1.75 px stroke on a 24 px grid, square caps, 18° forward slant where direction matters. <b>Never</b> use Microsoft product icons (Power Apps, Power BI…) as decoration. Where a product must be identified, use its name in text, per Microsoft's guidelines.</small></p>
+  <h3>Imagery</h3>
+  <div class="grid g2">
+    <div class="do" style="color:var(--ink)"><b>Do</b><ul><li>Product-like UI compositions: findings, environment maps, dashboards (anonymised)</li><li>Real team photos, natural light, Sofia office/city context, shot as candid documentary</li><li>Duotone treatment (Ink + Paper) for any photo used in hero areas</li><li>Diagrams that explain: environment routing, DLP groups, ALM pipelines</li></ul></div>
+    <div class="dont" style="color:var(--ink)"><b>Don't</b><ul><li>Stock handshakes, people pointing at glass screens, VR headsets</li><li>Glowing network nodes, blue globes, "digital brain" AI art</li><li>Microsoft's four-colour squares or product icons as decoration</li><li>Generic AI-generated people</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ UI ============ -->
+<section id="ui" data-title="UI components">
+  <div class="eyebrow">11 · UI components (preview for the website build)</div>
+  <h2>The kit the website will be built from.</h2>
+  <div class="grid g2" style="margin-top:22px">
+    <div class="card"><h4 style="margin-top:0">Buttons</h4><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn primary">Book a Governance Scan →</button><button class="btn secondary">Talk to an engineer</button><button class="btn ghost">Read the checklist</button></div><h4>Radius &amp; spacing</h4><p style="margin:0">Radius 10 px (controls), 14 px (cards), 18 px (feature panels). 8-pt spacing grid. Section padding 96/72 px desktop.</p></div>
+    <div class="card"><h4 style="margin-top:0">Form</h4><div style="display:grid;gap:10px"><input placeholder="Company" style="font:inherit;padding:12px;border-radius:10px;border:1.5px solid var(--mist)"><select style="font:inherit;padding:12px;border-radius:10px;border:1.5px solid var(--mist)"><option>Tenant size: 500–2,000 users</option></select><button class="btn primary" style="justify-content:center">Request the Scan</button></div></div>
+    <div class="card"><h4 style="margin-top:0">Service card</h4><div class="pill">Govern</div><h3 style="margin-top:10px">Governance Scan</h3><p>Environment inventory, maker map, DLP and Copilot exposure review. Findings report in BG or EN.</p><div style="display:flex;justify-content:space-between;font-family:var(--mono);font-size:13px;border-top:1px solid var(--mist);padding-top:12px"><span>2–3 weeks</span><span>fixed scope</span></div></div>
+    <div class="card"><h4 style="margin-top:0">Credential strip</h4><div style="display:flex;gap:8px;flex-wrap:wrap"><span class="pill">AB-400</span><span class="pill">AB-410</span><span class="pill">PL-300</span><span class="pill">SC-300</span><span class="pill">SC-401</span><span class="pill">AB-100</span></div><p style="margin-top:14px"><small>Certifications are shown per person, as text pills. Until the designation is awarded, show only the text line "Member of the Microsoft AI Cloud Partner Program". The official badge then goes in the footer or on the partner page, never next to our logo.</small></p></div>
+  </div>
+</section>
+
+<!-- ============ APPLICATIONS ============ -->
+<section id="apps" data-title="Applications">
+  <div class="eyebrow">12 · Applications</div>
+  <h2>The brand in use.</h2>
+  <h3>Website hero (direction mock, not the build)</h3>
+  <div class="browser dark"><div class="bar"><i></i><i></i><i></i><span>ustrema.com</span></div>
+    <div class="mock-nav"><div id="mockLogo"></div><div class="links"><span>Services</span><span>Industries</span><span>Work</span><span>Approach &amp; pricing</span><span>Insights</span><span>About</span></div><div style="display:flex;gap:14px;align-items:center"><span class="mono" style="font-size:12px">EN · BG</span><button class="btn primary" style="padding:9px 14px;font-size:13px">Book a Scan</button></div></div>
+    <div class="mock-hero">
+      <div><div class="eyebrow">Microsoft Power Platform · Governance · Copilot</div><h1>Momentum<br>with direction<span class="cursor" style="color:var(--signal)">_</span></h1><p class="lead" style="font-size:18px">We make Power Platform and Copilot safe to scale. Governance first, then the apps your business actually needs.</p><div style="display:flex;gap:10px;margin-top:22px"><button class="btn primary">Book a Governance Scan →</button><button class="btn secondary">How we work</button></div><div style="display:flex;gap:22px;margin-top:30px;font-size:13px;opacity:.65"><span>● 2–3 week entry</span><span>● Fixed price</span><span>● BG &amp; EN</span></div></div>
+      <div class="scan-card"><div style="display:flex;justify-content:space-between"><span class="mono" style="opacity:.6;font-size:11px">⌜ GOVERNANCE SCAN · SAMPLE TENANT ⌟</span><span class="pill sig">4 high</span></div>
+        <div class="scan-row"><span>Apps in default environment</span><b class="mono">412</b></div>
+        <div class="scan-row"><span>Makers with prod HR data access</span><b class="mono">23</b></div>
+        <div class="scan-row"><span>Tenant DLP policies</span><b class="mono" style="color:var(--signal)">0</b></div>
+        <div class="scan-row"><span>Copilot oversharing exposure</span><div class="bar-meter"><b style="width:78%"></b></div></div>
+        <div class="scan-row" style="border:0"><span>Managed Environments</span><b class="mono">off</b></div>
+      </div>
+    </div>
+  </div>
+  <div class="grid g2" style="margin-top:30px">
+    <div><h3>LinkedIn banner (1584×396)</h3><div id="liBanner" style="aspect-ratio:1584/396;border-radius:10px;overflow:hidden;position:relative;background:var(--ink)"></div></div>
+    <div><h3>Business card (85×55 mm)</h3><div style="display:flex;gap:14px"><div id="bcFront" style="aspect-ratio:85/55;flex:1;border-radius:8px;background:var(--ink);position:relative;overflow:hidden;box-shadow:0 10px 30px -12px rgba(0,0,0,.4)"></div><div id="bcBack" style="aspect-ratio:85/55;flex:1;border-radius:8px;background:var(--white);padding:16px;font-size:11px;box-shadow:0 10px 30px -12px rgba(0,0,0,.25)"></div></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:20px">
+    <div><h3>Email signature</h3><div class="card" id="sig" style="font-size:13px"></div></div>
+    <div><h3>Proposal / report cover</h3><div id="cover2" style="aspect-ratio:210/140;border-radius:10px;background:var(--paper);border:1px solid var(--mist);position:relative;overflow:hidden;padding:24px"></div></div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services" class="dark" data-title="Services & offers">
+  <div class="eyebrow">13 · Service offering</div>
+  <h2>One front door. Three doors behind it.</h2>
+  <p class="lead">Lead with a fixed-price <b>Governance Scan</b> that works before the Microsoft designation lands and turns into remediation, build and recurring work.</p>
+  <div class="grid g3" id="offers" style="margin-top:26px"></div>
+  
+  
+</section>
+
+<!-- ============ WEBSITE SCOPE ============ -->
+<section id="website" data-title="Website scope">
+  <div class="eyebrow">14 · Website scope (prep only — build not started)</div>
+  <h2>Six nav items. One primary CTA.</h2>
+  <div class="grid g2" style="margin-top:22px">
+    <div class="tree">ustrema.com  (EN at /, BG at /bg/)
+├── services/
+│   ├── power-platform-governance/   ★ flagship
+│   │   ├── governance-scan/         ★ entry offer
+│   │   └── governance-as-a-service/
+│   ├── copilot-and-agent-readiness/
+│   ├── power-platform-development/
+│   ├── power-bi/
+│   ├── dynamics-365/
+│   └── managed-support/
+├── industries/
+│   ├── banking-and-finance/
+│   ├── public-sector/
+│   ├── construction-and-real-estate/
+│   └── manufacturing-and-distribution/
+├── work/
+├── approach/        (how we work + rates)
+├── insights/
+│   └── governance-checklist/   (lead magnet)
+├── partners/        (for SIs)
+├── about/
+└── contact/</div>
+    <div>
+      <div class="card"><h4 style="margin-top:0">Homepage order</h4><ol style="margin:0;padding-left:20px;line-height:1.9"><li>Hero: idea + Scan CTA + finding-card visual</li><li>Problem strip: 4 failure modes</li><li>Three doors: Govern / Build / Scale with AI</li><li>Governance Scan feature: scope, timeline, deliverables</li><li>Proof: certifications per person, partner status, group</li><li>How we work: Scan → Guardrails → Build → Run</li><li>Insights</li><li>Final CTA + footer (ЕИК, address)</li></ol></div>
+      
+    </div>
+  </div>
+  
+</section>
+
+<!-- ============ MICROSOFT RULES ============ -->
+<section id="msrules" data-title="Microsoft brand rules">
+  <div class="eyebrow">15 · Partner &amp; trademark guardrails</div>
+  <h2>Look like a partner, not like Microsoft.</h2>
+  <div class="grid g2" style="margin-top:22px" id="msGrid">
+    <div class="do"><b>Do</b><ul>
+      <li>Before designation, use plain text only: "Member of the Microsoft AI Cloud Partner Program"</li>
+      <li>After designation: "Solutions Partner for AI Business Solutions" badge (from Partner Center), unaltered, ≥130 px wide, in the footer or on the partner page only, never combined with our logo</li>
+      <li>Expect the designation in ~12–13 months (the usage-growth metric needs a trailing 12 months of PAL-attributed usage), so design credentials to work badge-less</li>
+      <li>Use full product names with "Microsoft" on first mention per page: "Microsoft Power Platform". No abbreviations (M365, D365) in public copy</li>
+      <li>Use ® / ™ attribution in the footer: "Microsoft, Power Platform … are trademarks of the Microsoft group of companies."</li>
+      <li>Show individual certifications by exam code and name</li></ul></div>
+    <div class="dont"><b>Don't</b><ul>
+      <li>Use the Microsoft logo, four-square symbol, product icons or Segoe as brand elements</li>
+      <li>Put product names in our name, domain, logo or offer names (e.g. "PowerScan")</li>
+      <li>Imply endorsement ("Microsoft-approved", "official Microsoft …")</li>
+      <li>Use Microsoft's exact blues as our primary colour</li>
+      <li>Claim a designation, specialization or "Gold/Silver" (retired 2022) status, or say "official" / "certified partner"</li>
+      <li>Use Power Apps / Power BI / Copilot product icons decoratively, on service cards or as a "tech stack" strip (allowed only in diagrams and documentation)</li>
+      <li>Use product colours (Power BI yellow, Power Apps purple) as brand colours</li></ul></div>
+  </div>
+  
+</section>
+
+
+
+</main>
+<div class="tooltip" id="tip"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ================= DATA ================= */
+const PALETTES = {
+  O:{name:'O · Ink, Bone & Signal Fuchsia (recommended)', group:'proposal', strategy:'break', mode:'dark', ink:'#121016', ink2:'#1F1B26', paper:'#F4F1EC', signal:'#E847C9', signalDeep:'#B01E95', slate:'#625D6B', mist:'#E6E1E8', onSignal:'#121016', hue:312, pos:{x:8.6,y:7.4},
+     psy:{competence:3.5,excitement:4.5,sophistication:4.5,distinct:4.5,safety:3.5},
+     feel:'Confident, intelligent, a little unexpected',
+     story:'A mostly monochrome system (ink + bone) with <b>one fuchsia spark</b>. Ink and bone carry authority and calm, the "sophistication" signal research links to black. Fuchsia at 312° sits in a near-empty band of the 135-colour competitor map (3 colours, all muted) and reads as <b>energy + intelligence</b>: momentum, AI, confidence. <b>Tuned away from two famous neighbours:</b> Udemy\'s purple (#A435F0, 276°, a U-brand with an up-arrow) and Telekom magenta (#E20074, 329°, trademarked in places). Rules: never as a gradient (Copilot\'s gradient uses pink/purple); never for long text; links on Bone use Fuchsia Deep #B01E95 (5.4:1).'},
+  M:{name:'M · Monochrome Authority (ink & bone, no hue)', group:'proposal', strategy:'break', mode:'light', ink:'#15141A', ink2:'#25232C', paper:'#F2EFE9', signal:'#A39FAA', signalDeep:'#15141A', slate:'#5F5B66', mist:'#E2DED6', onSignal:'#15141A', hue:262, pos:{x:7.2,y:2.4},
+     psy:{competence:4.5,excitement:2,sophistication:5,distinct:4,safety:5},
+     feel:'Serious, editorial, law-firm calm',
+     story:'Differentiates by <b>absence</b>: every competitor uses a hue, and Ustrema uses none. Black and bone with typographic confidence, like a top-tier law or architecture firm. Maximum trust with regulated buyers and zero Microsoft colour conflict. The cost: almost no "drive" or energy, so the устрем idea must come from the logo and the words. Colour appears only in data and findings.'},
+  I:{name:'I · Indigo Night & Signal Iris (bridge)', group:'proposal', strategy:'bridge', mode:'dark', ink:'#13112B', ink2:'#211D44', paper:'#F4F2EE', signal:'#8C75FF', signalDeep:'#5A3FE8', slate:'#5F5B78', mist:'#E3E1EE', onSignal:'#13112B', hue:250, pos:{x:4.9,y:4.9},
+     psy:{competence:4.5,excitement:3.5,sophistication:4.5,distinct:3.5,safety:3},
+     feel:'Trusted, modern, quietly innovative',
+     story:'The bridge strategy: it speaks the category\'s trust language (deep indigo reads "navy-serious" at a glance) in its own dialect. The iris accent leans violet, so it adds innovation and AI without being blue. Easiest sell to a bank CISO. Risk: iris (≈250°) is the 2024–26 "AI startup" violet, so it\'s less ownable over time.'},
+  P:{name:'P · Night Plum, Bone & Signal Cyan (previous direction)', group:'proposal', strategy:'bridge', mode:'dark', ink:'#160F26', ink2:'#241A3A', paper:'#F4F0E8', signal:'#00D6E8', signalDeep:'#00707C', slate:'#635D70', mist:'#E5DFD3', onSignal:'#160F26', hue:186, pos:{x:6.2,y:6.1},
+     psy:{competence:4,excitement:4,sophistication:4,distinct:3,safety:3},
+     feel:'Precise, technical, fast',
+     story:'The v3 recommendation, built on your cyan inspo. Kept as a proposal, but you flagged that cyan still reads blue. Psychologically cyan signals precision and clarity, though it belongs to the blue family that 50+ competitor colours already occupy.'},
+  X:{name:'X · Oxblood & Bone (heritage)', group:'proposal', strategy:'break', mode:'light', ink:'#1D1013', ink2:'#2E1A1F', paper:'#F5F0EA', signal:'#C9365E', signalDeep:'#8E1B3A', slate:'#6B5D61', mist:'#E8DED9', onSignal:'#FFFFFF', hue:344, pos:{x:4.5,y:6.9},
+     psy:{competence:4.5,excitement:3.5,sophistication:4.5,distinct:2.5,safety:3},
+     feel:'Established, assured, contained energy',
+     story:'Deep wine: red\'s energy held back by darkness, which is literally "momentum with direction". Reads as institution-grade (universities, private banks), with a Bulgarian wine nod (Mavrud, Melnik). Risk: deep crimson is already used by several Bulgarian ERP houses.'},
+  B:{name:'B · Ultramarine (own the majority blue)', group:'proposal', strategy:'conform', mode:'light', ink:'#0F1030', ink2:'#1C1E4A', paper:'#F4F3EF', signal:'#5753FF', signalDeep:'#2A26D9', slate:'#5C5E78', mist:'#E2E2EC', onSignal:'#FFFFFF', hue:241, pos:{x:2.6,y:5.2},
+     psy:{competence:5,excitement:3.5,sophistication:3,distinct:2,safety:2.5},
+     feel:'Competent, confident, familiar',
+     story:'The honest answer to "should we go with the majority?". Blue gives instant competence (the strongest colour–trait link in the research) and ecosystem familiarity. Electric ultramarine (241°, Klein-blue-like) is visibly different from Microsoft blue (#0078D4, 206°). The cost: you join 50 blue competitor colours, and buyers comparing three partners will remember you less.'},
+  Y:{name:'Y · Ink & Guardrail Saffron', group:'proposal', strategy:'break', mode:'dark', ink:'#141414', ink2:'#222222', paper:'#F4F2EC', signal:'#FFC21A', signalDeep:'#7A5600', slate:'#66625A', mist:'#E6E1D4', onSignal:'#141414', hue:44, pos:{x:6.4,y:8.8},
+     psy:{competence:3,excitement:5,sophistication:2.5,distinct:3,safety:1.5},
+     feel:'Alert, optimistic, impossible to miss',
+     story:'Guardrail yellow: safety signage, caution and attention, which is a literal metaphor for governance. Highest energy of the set. The deal-breaker: Microsoft Power BI\'s brand yellow (#F2C811) is right next to it, and partners are told not to borrow product colours.'},
+  r1:{name:'✕ v1 · Ink & Vermilion', group:'rejected', strategy:'conform', mode:'light', ink:'#161A33', ink2:'#252A4A', paper:'#F4F1EA', signal:'#FF5A1F', signalDeep:'#D2410E', slate:'#5C6378', mist:'#E6E2D8', onSignal:'#FFFFFF', hue:17, pos:{x:1.6,y:8},
+     psy:{competence:4,excitement:5,sophistication:2.5,distinct:1,safety:4}, feel:'Energetic, familiar',
+     story:'Rejected: navy + orange is the category default (11 of 20 sites).'},
+  r2:{name:'✕ v3 · Obsidian & Signal Cyan', group:'rejected', strategy:'bridge', mode:'dark', ink:'#0E1116', ink2:'#1A1F27', paper:'#F5F5F5', signal:'#00D6E8', signalDeep:'#007480', slate:'#5F6672', mist:'#E4E6EA', onSignal:'#0E1116', hue:186, pos:{x:4.4,y:6.6},
+     psy:{competence:4,excitement:4,sophistication:3.5,distinct:2.5,safety:3}, feel:'Technical',
+     story:'Rejected: near-black is already used by three local competitors; cyan reads blue.'},
+  r3:{name:'✕ v2 · Obsidian & Go Green', group:'rejected', strategy:'break', mode:'dark', ink:'#0D110F', ink2:'#18201C', paper:'#F4F6F4', signal:'#2BD964', signalDeep:'#0F7A34', slate:'#5E6862', mist:'#E2E7E3', onSignal:'#0D110F', hue:136, pos:{x:6,y:7.6},
+     psy:{competence:3.5,excitement:4,sophistication:3,distinct:3,safety:1.5}, feel:'Go',
+     story:'Rejected: green on near-black is crowded, and a close local competitor owns mint.'}
+};
+const PNAMES={O:['Ink','Ink 2','Bone','Signal Fuchsia','Fuchsia Deep','Stone','Mist'],M:['Ink','Ink 2','Bone','Grey Signal','Ink','Stone','Linen'],I:['Indigo Night','Indigo 2','Bone','Signal Iris','Iris Deep','Dusk','Mist'],P:['Night Plum','Plum 2','Bone','Signal Cyan','Cyan Deep','Dusk','Sand'],X:['Oxblood Ink','Oxblood 2','Bone','Signal Wine','Oxblood','Stone','Linen'],B:['Navy Ink','Navy 2','Bone','Ultramarine','Ultramarine Deep','Slate','Mist'],Y:['Ink','Ink 2','Bone','Guardrail Saffron','Saffron Deep','Stone','Sand'],r1:['Ink','Ink 2','Paper','Vermilion','Vermilion Deep','Slate','Mist'],r2:['Obsidian','Graphite','Fog','Signal Cyan','Signal Deep','Steel','Mist'],r3:['Obsidian','Graphite','Fog','Go Green','Go Deep','Steel','Mist']};
+Object.entries(PALETTES).forEach(([k,v])=>{const n=PNAMES[k];v.names={ink:n[0],ink2:n[1],paper:n[2],signal:n[3],signalDeep:n[4],slate:n[5],mist:n[6]}});
+const PSY_DIMS=[['competence','Competence / trust',.25,'Blue is the colour most linked to competence (Labrecque & Milne, 2012); dark, restrained palettes add to it'],['excitement','Excitement / momentum',.20,'The устрем: energy, drive. Red, magenta and saturated accents score highest'],['sophistication','Sophistication / intelligence',.15,'Black and purple are linked to sophistication; this fits AI and Copilot work'],['distinct','Distinctiveness',.25,'Distance from the competitor map: hue band emptiness plus base choice'],['safety','Constraint safety',.15,'No clash with Microsoft product colours or close local competitors']];
+const psyScore=v=>PSY_DIMS.reduce((t,[d,,w])=>t+v.psy[d]*w,0);
+const TYPES = {
+  manrope:{name:'Manrope + Onest (recommended)', display:"'Manrope'", text:"'Onest'", disp:'<b>Manrope</b> 700–800 (OFL, full Cyrillic). Closest to the inspo wordmark: compact geometric grotesk with open, fast curves. Headlines 700–800, tracking −3 to −4%. The wordmark is always Manrope 800.', txt:'<b>Onest</b> 400/500 (OFL, Cyrillic), readable in BG and EN, slightly warmer than Manrope at body sizes.', story:'Matches the v2 inspo.'},
+  geo:{name:'Geologica + Onest (v1)', display:"'Geologica'", text:"'Onest'", disp:'<b>Geologica</b> (Google Fonts, OFL, variable, full Cyrillic). A geometric grotesk with a slightly technical, sharp feel. Its variable "sharpness" and slant axes echo the forward chip of the logo. Headlines 600, tracking −2.5 to −4.5%.', txt:'<b>Onest</b> (Google Fonts, OFL, Cyrillic). Made for screen readability in Bulgarian and English, neutral but warm. Body 400/500, 16–18 px, 1.55 line-height.', story:'Both families are free (OFL), self-hostable, Cyrillic-complete and distinctive in the category.'},
+  sofia:{name:'Sofia Sans (Bulgarian-designed)', display:"'Sofia Sans Semi Condensed'", text:"'Sofia Sans'", disp:'<b>Sofia Sans Semi Condensed</b> 600–700: designed in Bulgaria (Lettersoup), with true <b>Bulgarian Cyrillic</b> letterforms (locl bg). Compact, confident headlines.', txt:'<b>Sofia Sans</b> 400/500 for body, same family, so BG and EN feel identical.', story:'Suggested by the teardown: no competitor uses a typeface with proper Bulgarian Cyrillic forms. It is a quiet local-pride signal that BG readers notice. Free (OFL). Trade-off: less geometric "tech" edge than Geologica.'},
+  man:{name:'Manrope + Inter', display:"'Manrope'", text:"'Inter'", disp:'<b>Manrope</b>: rounded geometric, friendly-modern, Cyrillic.', txt:'<b>Inter</b>: the industry default UI face, very safe, very common.', story:'The safe option. Polished, but it looks like hundreds of SaaS sites, so it adds little distinctiveness.'},
+  unb:{name:'Unbounded + Onest', display:"'Unbounded'", text:"'Onest'", disp:'<b>Unbounded</b>: wide, bold display face with lots of attitude, Cyrillic.', txt:'<b>Onest</b> for body.', story:'The loud option. Memorable, but it leans crypto/startup and may feel off for banks and the public sector.'},
+  plex:{name:'IBM Plex Sans', display:"'IBM Plex Sans'", text:"'IBM Plex Sans'", disp:'<b>IBM Plex Sans</b> 600: engineered, humanist-grotesk, Cyrillic.', txt:'<b>IBM Plex Sans</b> 400.', story:'The engineer option. Credible and technical, but strongly associated with IBM.'}
+};
+let _uid=0;const uid=()=>'u'+(++_uid);
+const UP="M10 8H24V36A8 8 0 0 0 40 36V8H54V36A22 22 0 0 1 10 36Z";
+const msk=(f)=>{const i=uid();return f(i)};
+const OB=(inner)=>`<g transform="translate(7 0) skewX(-14)">${inner}</g>`;
+const MIT="M8 6H22V42H42V6H56V46L46 56H18L8 46Z";
+const SURGE="M7 22H24V40A8 8 0 0 0 40 40V30C40 15 48 6 62 1C55.5 11 57 24 57 40A25 25 0 0 1 7 40Z";
+const LOGOS = {
+  m04:{name:'Mark 04 · Three Streams (preferred)', story:'A rounded U built from three parts, two arms and a bowl, separated by <b>flowing curved gaps that sweep down into the bowl like converging streams</b>. Устрем as a current: separate efforts (makers, IT, business) flowing into one direction. Rounded terminals make it the friendliest and most approachable of the three; strong as an app icon.',
+     mark:(f,a)=>`<g transform="translate(32 32) scale(1.605) translate(-20.0 -20.6)"><path d="m34.97 17.85c-1.37 1.69-3.67 2.88-5.55 3.91-1.6 0.89-2.17 1.73-2.62 3.33-1.01 3.54-3.71 5.64-6.82 5.64-3.6 0-6.34-2.36-7.19-6.37-0.34-1.65-1.12-2.68-2.7-3.4-1.89-0.89-3.94-1.99-5.12-3.43v4.34c0 9.44 6.93 14.97 15.01 14.97 8.76 0 14.99-6.78 14.99-14.69v-4.3z" fill="${f}"/><path d="m7.91 3.16c-1.64 0-2.84 1.07-2.84 2.86v7.1c0 2.41 1.17 3.77 4.3 5.19 2.32 1.03 5.81 2.01 8.24 2.4-2.02-1-4.05-2.28-5.28-3.66-0.83-0.97-1.12-2-1.14-3.91-0.03-2.2-0.03-4.82-0.03-6.63 0-2.29-1.55-3.35-3.25-3.35z" fill="${f}"/><path d="m32.05 3.16c-1.8 0-3.24 1.29-3.24 3.43v7.1c0 2.46-0.38 3.84-2.1 5.69-1.7 1.84-2.76 3.71-2.88 5.88h0.09c0.89-2.27 2.96-3.99 5.9-5.59 3.42-1.89 5.1-3.28 5.1-6.24v-7.34c0.01-1.88-1.23-2.93-2.87-2.93z" fill="${f}"/></g>`},
+  m04s:{name:'Mark 04 · with signal', story:'Optional accent: the right arm, the stream that leads, carries the signal colour.',
+     mark:(f,a)=>`<g transform="translate(32 32) scale(1.605) translate(-20.0 -20.6)"><path d="m34.97 17.85c-1.37 1.69-3.67 2.88-5.55 3.91-1.6 0.89-2.17 1.73-2.62 3.33-1.01 3.54-3.71 5.64-6.82 5.64-3.6 0-6.34-2.36-7.19-6.37-0.34-1.65-1.12-2.68-2.7-3.4-1.89-0.89-3.94-1.99-5.12-3.43v4.34c0 9.44 6.93 14.97 15.01 14.97 8.76 0 14.99-6.78 14.99-14.69v-4.3z" fill="${f}"/><path d="m7.91 3.16c-1.64 0-2.84 1.07-2.84 2.86v7.1c0 2.41 1.17 3.77 4.3 5.19 2.32 1.03 5.81 2.01 8.24 2.4-2.02-1-4.05-2.28-5.28-3.66-0.83-0.97-1.12-2-1.14-3.91-0.03-2.2-0.03-4.82-0.03-6.63 0-2.29-1.55-3.35-3.25-3.35z" fill="${f}"/><path d="m32.05 3.16c-1.8 0-3.24 1.29-3.24 3.43v7.1c0 2.46-0.38 3.84-2.1 5.69-1.7 1.84-2.76 3.71-2.88 5.88h0.09c0.89-2.27 2.96-3.99 5.9-5.59 3.42-1.89 5.1-3.28 5.1-6.24v-7.34c0.01-1.88-1.23-2.93-2.87-2.93z" fill="${a}"/></g>`},
+  m01:{name:'Mark 01 · Riverbend (preferred)', story:'A U with angled arm tops, where <b>one flowing cut detaches the left arm and bends through the bowl like a river</b>. It reads as a path through the landscape: the route Ustrema charts through a client\'s tenant. It is one continuous shape (a single path), so it is the cleanest in one colour and the most distinctive silhouette of the three.',
+     mark:(f,a)=>`<g transform="translate(32 32) scale(1.333) translate(-24.8 -25.0)"><path d="m6.07 4.08v11.89c0 2.67 1.54 4.25 10.05 5.67v-11.56c0-0.99-0.55-1.87-1.5-2.29l-7.14-3.45c-0.5-0.21-0.97-0.28-1.41-0.26zm37.48-0.05c-0.27 0-0.53 0.07-0.84 0.2l-7.27 3.53c-1 0.42-1.46 1.36-1.46 2.42v17.2c0.27 5.04-4.71 8.71-9.68 8.71-3.64 0-5.29-1.36-5.29-2.76 0-2.45 5.51-3.14 5.51-5.1 0-1.61-5.14-2.86-9.62-3.76-3.97-0.8-7.63-1.9-8.8-3.89 0 1.79 0.02 3.91 0.05 5.84 0.13 12.03 8.29 19.5 18.95 19.5 11.2 0 18.97-9.04 18.95-20.2v-21.64c-0.16-0.04-0.33-0.05-0.5-0.05z" fill="${f}"/></g>`},
+  m03:{name:'Mark 03 · Twin Current (preferred)', story:'Two pieces, the left arm with the bowl and the right arm, <b>meeting along a single S-curve</b>. Two partners moving as one; governance and delivery joined by one flowing line. Angled tops give it a confident stance. The most balanced of the three, and the most legible at small sizes.',
+     mark:(f,a)=>`<g transform="translate(32 32) scale(1.421) translate(-24.05 -24.0)"><path d="m32.94 39.86c0 2.12-4.27 3.85-9.3 3.85-10.55 0-17.16-8.69-17.16-16.29v-22.24c0-0.19 0.15-0.27 0.31-0.19l8.28 4.81c0.75 0.43 1.12 1.17 1.12 2.16v13.79c0 3.76 2.29 7.71 8.06 9.57 3.95 1.24 8.69 2.06 8.69 4.54z" fill="${f}"/><path d="m41.59 4.55v23.06c0 5.3-3.51 10.8-7.25 13.06 0.22-0.36 0.34-0.73 0.34-1.21 0-1.93-2.3-3.24-5.03-4.05-2.81-0.84-5.09-1.47-6.11-1.95 4.71-0.38 8.51-3.47 8.51-7.71v-14.42c0-1.03 0.39-1.78 1.17-2.17l8.13-4.72c0.14-0.06 0.24-0.02 0.24 0.11z" fill="${f}"/></g>`},
+  m03s:{name:'Mark 03 · with signal', story:'Optional accent: the right piece carries the signal colour (two partners, two tones). Test against the horseshoe-magnet reading before adopting.',
+     mark:(f,a)=>`<g transform="translate(32 32) scale(1.421) translate(-24.05 -24.0)"><path d="m32.94 39.86c0 2.12-4.27 3.85-9.3 3.85-10.55 0-17.16-8.69-17.16-16.29v-22.24c0-0.19 0.15-0.27 0.31-0.19l8.28 4.81c0.75 0.43 1.12 1.17 1.12 2.16v13.79c0 3.76 2.29 7.71 8.06 9.57 3.95 1.24 8.69 2.06 8.69 4.54z" fill="${f}"/><path d="m41.59 4.55v23.06c0 5.3-3.51 10.8-7.25 13.06 0.22-0.36 0.34-0.73 0.34-1.21 0-1.93-2.3-3.24-5.03-4.05-2.81-0.84-5.09-1.47-6.11-1.95 4.71-0.38 8.51-3.47 8.51-7.71v-14.42c0-1.03 0.39-1.78 1.17-2.17l8.13-4.72c0.14-0.06 0.24-0.02 0.24 0.11z" fill="${a}"/></g>`}
+};
+const UPd="M10 16H24V40A8 8 0 0 0 40 40V16H54V40A22 22 0 0 1 10 40Z";
+const M4 = {
+ cap:{n:'01 · Cap',ref:'Udemy',sym:'mirror',d:'A signal chevron sits on the axis above the U: direction placed exactly on the centre line.',
+  s:(f,a)=>`<path d="${UPd}" fill="${f}"/><path d="M22 11L32 1L42 11V14L32 6L22 14Z" fill="${a}"/>`},
+ frame:{n:'02 · Frame',ref:'UiPath',sym:'mirror',d:'The U held between two brackets: governance as a frame, not a cage.',
+  s:(f,a)=>`<path d="M20 18H27V36A5 5 0 0 0 37 36V18H44V36A12 12 0 0 1 20 36Z" fill="${f}"/><path d="M14 6H6V58H14M50 6H58V58H50" fill="none" stroke="${a}" stroke-width="4"/>`},
+ badge:{n:'03 · Badge',ref:'Uber app / Ubiquiti',sym:'mirror',d:'A solid disc with the U carved out. Reads at 12 px and works as an app icon by default.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M19 14H28V34A4 4 0 0 0 36 34V14H45V34A13 13 0 0 1 19 34Z" fill="#000"/></mask><circle cx="32" cy="32" r="30" fill="${f}" mask="url(#${i})"/><circle cx="32" cy="54" r="3" fill="${a}"/>`},
+ shield:{n:'04 · Shield',ref:'UPS',sym:'mirror',d:'A U carved into a shield, with a signal band at the top. Governance and protection, read in one second.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M21 20H28V34A4 4 0 0 0 36 34V20H43V34A11 11 0 0 1 21 34Z" fill="#000"/></mask><path d="M8 12H56V32C56 47 45 56 32 62C19 56 8 47 8 32Z" fill="${f}" mask="url(#${i})"/><path d="M8 4H56V9H8Z" fill="${a}"/>`},
+ link:{n:'05 · Link',ref:'Unity',sym:'rotational 180°',d:'Two Us interlock, one upright and one inverted: partnership, integration, two founders. Perfect 180° symmetry.',
+  s:(f,a)=>`<path d="M26 60V34A12 12 0 0 1 50 34V60" fill="none" stroke="${a}" stroke-width="8"/><path d="M14 4V30A12 12 0 0 0 38 30V4" fill="none" stroke="${f}" stroke-width="8"/><path d="M50 38V60" stroke="${a}" stroke-width="8"/>`},
+ ring:{n:'06 · Ring',ref:'—',sym:'mirror',d:'A small ring floats on the axis above the U, like the Ů diacritic: a target, a node, a "point of focus".',
+  s:(f,a)=>`<path d="${UPd}" fill="${f}"/><circle cx="32" cy="7" r="5" fill="none" stroke="${a}" stroke-width="3.5"/>`},
+ bars:{n:'07 · Bars',ref:'Unilever (modular)',sym:'mirror',d:'A U built from five bars, with the centre bar in signal: data, Power BI, a bowl of measurements.',
+  s:(f,a)=>`<rect x="5" y="6" width="9" height="46" rx="1" fill="${f}"/><rect x="17" y="34" width="9" height="24" rx="1" fill="${f}"/><rect x="29" y="42" width="6" height="20" rx="1" fill="${a}"/><rect x="38" y="34" width="9" height="24" rx="1" fill="${f}"/><rect x="50" y="6" width="9" height="46" rx="1" fill="${f}"/>`},
+ dots:{n:'08 · Grid',ref:'Unilever / Ubiquiti',sym:'mirror',d:'A U drawn on a 5×5 dot grid, with the centre-base dot in signal. A system made of small, governed units.',
+  s:(f,a)=>[8,20,32,44].map(y=>`<circle cx="8" cy="${y}" r="5" fill="${f}"/><circle cx="56" cy="${y}" r="5" fill="${f}"/>`).join('')+`<circle cx="18" cy="54" r="5" fill="${f}"/><circle cx="46" cy="54" r="5" fill="${f}"/><circle cx="32" cy="57" r="5" fill="${a}"/>`},
+ nested:{n:'09 · Ripple',ref:'—',sym:'mirror',d:'Three concentric Us, with the innermost in signal. Layers of control around a core; a ripple of momentum.',
+  s:(f,a)=>`<path d="M6 4V34A26 26 0 0 0 58 34V4" fill="none" stroke="${f}" stroke-width="5.5"/><path d="M17 4V34A15 15 0 0 0 47 34V4" fill="none" stroke="${f}" stroke-width="5.5"/><path d="M28 4V34A4 4 0 0 0 36 34V4" fill="none" stroke="${a}" stroke-width="5.5"/>`},
+ gate:{n:'10 · Pillars',ref:'—',sym:'mirror',d:'Capitals on both arms turn the U into a classical gate: institution-grade trust for banks and the public sector.',
+  s:(f,a)=>`<path d="M12 14H22V40A10 10 0 0 0 42 40V14H52V40A20 20 0 0 1 12 40Z" fill="${f}"/><rect x="6" y="5" width="22" height="6" fill="${a}"/><rect x="36" y="5" width="22" height="6" fill="${a}"/>`},
+ arrow:{n:'11 · True North',ref:'—',sym:'mirror',d:'An arrow rises from the base, through the counter and past the arms: guardrails on both sides, one direction in the middle.',
+  s:(f,a)=>`<path d="M10 14H22V38A10 10 0 0 0 42 38V14H54V38A22 22 0 0 1 10 38Z" fill="${f}"/><path d="M29 44V18H24L32 4L40 18H35V44Z" fill="${a}"/>`},
+ hex:{n:'12 · Hex',ref:'Unity (cube)',sym:'mirror',d:'A hexagon with a U carved in and a signal "roof" facet: the platform, the governed container.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M21 22H28V36A4 4 0 0 0 36 36V22H43V36A11 11 0 0 1 21 36Z" fill="#000"/></mask><path d="M58 19V47L32 62L6 47V19Z" fill="${f}" mask="url(#${i})"/><path d="M32 2L58 16H6Z" fill="${a}"/>`},
+ moon:{n:'13 · Keyhole',ref:'—',sym:'mirror',d:'A U pressed into a full circle from above, like a keyhole or a vessel being filled. Access control, made iconic.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M21 0H28V30A4 4 0 0 0 36 30V0H43V30A11 11 0 0 1 21 30Z" fill="#000"/></mask><circle cx="32" cy="34" r="28" fill="${f}" mask="url(#${i})"/><circle cx="32" cy="4" r="0" fill="${a}"/>`},
+ blades:{n:'14 · Two Blades',ref:'—',sym:'mirror (break)',d:'Two mirrored halves with a gap on the axis. Their tops cut inward and rise to an implied arrow, with a signal point between them.',
+  s:(f,a)=>`<path d="M10 18L24 6V40A8 8 0 0 0 30.5 47.86V61.95A22 22 0 0 1 10 40Z" fill="${f}"/><path d="M54 18L40 6V40A8 8 0 0 1 33.5 47.86V61.95A22 22 0 0 0 54 40Z" fill="${f}"/><path d="M32 0L36 6L32 12L28 6Z" fill="${a}"/>`},
+ funnel:{n:'15 · Funnel',ref:'—',sym:'mirror',d:'Arm tops slope down toward the centre and channel into the counter. Focus and scoping; the "Scan" in a shape.',
+  s:(f,a)=>`<path d="M10 4L24 14V38A8 8 0 0 0 40 38V14L54 4V38A22 22 0 0 1 10 38Z" fill="${f}"/><path d="M28 24H36V30H28Z" fill="${a}"/>`},
+ under:{n:'16 · Baseline',ref:'inspo cursor',sym:'mirror',d:'The cursor moved onto the axis: a signal bar centred under the U. "Ready", as in a prompt. Calm and very legible.',
+  s:(f,a)=>`<path d="M10 4H24V30A8 8 0 0 0 40 30V4H54V30A22 22 0 0 1 10 30Z" fill="${f}"/><rect x="16" y="56" width="32" height="6" fill="${a}"/>`},
+ halo:{n:'17 · Halo',ref:'—',sym:'mirror',d:'A signal arc above mirrors the bowl below, making an open circle with two gaps. Wholeness with openings.',
+  s:(f,a)=>`<path d="${UPd}" fill="${f}"/><path d="M12 12A24 24 0 0 1 52 12" fill="none" stroke="${a}" stroke-width="5"/>`},
+ bauhaus:{n:'18 · Modules',ref:'Bauhaus',sym:'mirror (break)',d:'Two square arms and a half-ring base, separated by clean gaps: a U assembled from parts. Engineered and modular.',
+  s:(f,a)=>`<rect x="10" y="4" width="14" height="32" fill="${f}"/><rect x="40" y="4" width="14" height="32" fill="${f}"/><path d="M10 39H24A8 8 0 0 0 40 39H54A22 22 0 0 1 10 39Z" fill="${a}"/>`},
+ soft:{n:'19 · Soft U + Spark',ref:'Udemy (friendly)',sym:'mirror',d:'A rounded, approachable U with a diamond spark above the axis. The friendliest option, for the training and enablement side.',
+  s:(f,a)=>`<path d="M17 22V40A15 15 0 0 0 47 40V22" fill="none" stroke="${f}" stroke-width="14" stroke-linecap="round"/><path d="M32 1L38 8L32 15L26 8Z" fill="${a}"/>`},
+ twinarrow:{n:'20 · Twin Rise',ref:'—',sym:'mirror',d:'Both arms end in arrowheads: everything moves up together. Growth on both sides of the partnership.',
+  s:(f,a)=>`<path d="M12 22H22V40A10 10 0 0 0 42 40V22H52V40A20 20 0 0 1 12 40Z" fill="${f}"/><path d="M5 24L17 6L29 24Z" fill="${a}"/><path d="M35 24L47 6L59 24Z" fill="${a}"/>`},
+ portal:{n:'21 · Portal',ref:'—',sym:'mirror',d:'An arch (an inverted U) stands inside the U: a door within a container. Entry, access, the way in.',
+  s:(f,a)=>`<path d="M8 4H22V36A10 10 0 0 0 42 36V4H56V36A24 24 0 0 1 8 36Z" fill="${f}"/><path d="M26 40V22A6 6 0 0 1 38 22V40Z" fill="${a}"/>`},
+ pixel:{n:'22 · Pixel',ref:'—',sym:'mirror',d:'A stepped-pixel U with a signal pixel lifting off the axis above. Digital and built block by block.',
+  s:(f,a)=>`<path d="M8 12H20V40H26V46H38V40H44V12H56V46H50V52H44V58H20V52H14V46H8Z" fill="${f}"/><rect x="28" y="2" width="8" height="8" fill="${a}"/>`},
+ bracket:{n:'23 · Square U',ref:'—',sym:'mirror (break)',d:'A square U with both lower corners opened by 45° gaps, so the base floats. Stable and engineered, with a hint of motion.',
+  s:(f,a)=>`<path d="M8 4H20V42L8 54Z" fill="${f}"/><path d="M56 4H44V42L56 54Z" fill="${f}"/><path d="M14 60L24 48H40L50 60Z" fill="${a}"/>`},
+ diamond:{n:'24 · Diamond',ref:'Umbro',sym:'mirror',d:'A U carved into a diamond, with the lower facet in signal. A compass shape: direction in every axis.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M22 14H28V31A4 4 0 0 0 36 31V14H42V31A10 10 0 0 1 22 31Z" fill="#000"/></mask><path d="M32 2L62 32L32 62L2 32Z" fill="${f}" mask="url(#${i})"/><path d="M32 62L18 48H46Z" fill="${a}"/>`},
+ trace:{n:'25 · Trace',ref:'circuit',sym:'mirror',d:'A monoline U with signal nodes at both ends, like a circuit trace. A connection that starts and ends somewhere deliberate.',
+  s:(f,a)=>`<path d="M14 14V36A18 18 0 0 0 50 36V14" fill="none" stroke="${f}" stroke-width="7"/><circle cx="14" cy="10" r="7" fill="${a}"/><circle cx="50" cy="10" r="7" fill="${a}"/>`},
+ app:{n:'26 · Tile',ref:'Uber / UiPath box',sym:'mirror',d:'A rounded square with a U carved in and a signal stem in the counter. An app icon first, a logo second.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M16 12H26V34A6 6 0 0 0 38 34V12H48V34A16 16 0 0 1 16 34Z" fill="#000"/></mask><rect x="2" y="2" width="60" height="60" rx="14" fill="${f}" mask="url(#${i})"/><rect x="29" y="12" width="6" height="18" fill="${a}"/>`},
+};
+
+const V4VERD={"cap": ["rej", "Too close to Udemy's \"Uptick\" (an up-arrow above a U)."], "frame": ["rej", "Echoes UiPath's old frame."], "badge": ["short", "→ N3 North Badge."], "shield": ["short", "→ N4 / H1."], "link": ["rej", "The interlock never resolves; reads as \"Կh\"."], "ring": ["park", "Reads as the Czech letter Ů."], "bars": ["rej", "Reads as an equaliser or chart; the U is lost."], "dots": ["park", "Nice system, weak mark."], "nested": ["park", "Concentric Us drift toward a magnetic field."], "gate": ["park", "Reads as Ū with a macron."], "arrow": ["rec", "→ N1 True North (recommended)."], "hex": ["park", "The roof facet reads as \"home\"."], "moon": ["rej", "Power-button icon."], "blades": ["short", "→ B1 and B2 (Two Blades + North)."], "funnel": ["rej", "The square reads as a mouth."], "under": ["park", "Clean, but too plain."], "halo": ["park", "Headphones / magnet field."], "bauhaus": ["rej", "Horseshoe magnet."], "soft": ["park", "Friendly, but Udemy-adjacent."], "twinarrow": ["rej", "Arrowheads on the arms read as a U-turn, the opposite of momentum."], "portal": ["park", "Reads as a tongue or mouth."], "pixel": ["park", "Retro-game feel."], "bracket": ["rej", "Chair or robot."], "diamond": ["park", "Umbro-adjacent; heavy at small sizes."], "trace": ["rej", "Magnet with poles."], "app": ["park", "Good icon, weak logo."]};
+const EXPLORE4=Object.entries(M4).map(([k,m])=>[m.n+(m.ref&&m.ref!=='—'?' · ref: '+m.ref:''),V4VERD[k][0],V4VERD[k][1]+' <i>('+m.sym+')</i>',(f,a)=>m.s(f,a,uid())]);
+const M5 = {
+ mitre:{n:'01 · Mitre',d:'Square U with both outer base corners mitred at 45°. One shape, engineered, very clean.',
+  s:(f,a)=>`<path d="M8 6H22V42H42V6H56V46L46 56H18L8 46Z" fill="${f}"/>`},
+ mitreIn:{n:'02 · Inner Peak',d:'Square outside; inside, the base rises to a point, so the counter carries a hidden "up".',
+  s:(f,a)=>`<path d="M8 6H22V40L32 30L42 40V6H56V56H8Z" fill="${f}"/>`},
+ oblique:{n:'03 · Oblique',d:'The mitred U leaned 14° forward, like italic speed. Still one shape, just moving.',
+  s:(f,a)=>`<g transform="translate(7 0) skewX(-14)"><path d="M8 6H22V42H42V6H56V46L46 56H18L8 46Z" fill="${f}"/></g>`},
+ blade:{n:'04 · Blade',d:'The left arm stays straight; the right arm tapers to a sharp point. Precision on one side, momentum on the other.',
+  s:(f,a)=>`<path d="M8 8H22V36A10 10 0 0 0 42 36L56 2V36A24 24 0 0 1 8 36Z" fill="${f}"/>`},
+ bladeSq:{n:'05 · Square Blade',d:'Angular version of Blade: a squared U whose right arm ends in a 30° knife edge.',
+  s:(f,a)=>`<path d="M8 14H22V42H42V10L56 2V56H18L8 46Z" fill="${f}"/>`},
+ lower:{n:'06 · Lowercase u',d:'A lowercase "u" with a full right stem and a sharp diagonal foot. More approachable and typographic.',
+  s:(f,a)=>`<path d="M8 8H22V34A10 10 0 0 0 42 34V8H56V60H42V52A22 22 0 0 1 8 34Z" fill="${f}"/><path d="M42 60H56L56 52Z" fill="${f}"/>`},
+ lowerCut:{n:'07 · Lowercase u, spur',d:'Lowercase u where the right stem ends in a sharp spur pointing forward. A quiet motion detail.',
+  s:(f,a)=>`<path d="M8 8H22V34A10 10 0 0 0 42 34V8H56V52L62 60H42V52A22 22 0 0 1 8 34Z" fill="${f}"/>`},
+ fold:{n:'08 · Fold',d:'A single band folded into a U with sharp creases; the base facet carries the accent. Paper-like, crafted.',
+  s:(f,a)=>`<path d="M8 4H22V40L8 54Z" fill="${f}"/><path d="M8 54L22 40H42L56 54Z" fill="${a}"/><path d="M42 4H56V54L42 40Z" fill="${f}"/>`},
+ iso:{n:'09 · Block',d:'The U extruded into a sharp isometric block, with the side faces in accent. Solid, built, structural.',
+  s:(f,a)=>`<path d="M14 2H26V36H40V2H52L58 -2H46V32" fill="none"/><path d="M12 10L18 4H30L24 10ZM40 10L46 4H58L52 10ZM52 10L58 4V50L52 56Z" fill="${a}"/><path d="M6 10H24V40H40V10H52V56H6Z" fill="${f}"/>`},
+ tile:{n:'10 · Slant Tile',d:'A forward-leaning parallelogram tile with the U knocked out. It works as an app icon on day one.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M24 14H31V36H39V14H46L42 44H20Z" fill="#000"/></mask><path d="M14 4H62L50 60H2Z" fill="${f}" mask="url(#${i})"/>`},
+ mono:{n:'11 · Monoline',d:'A thin, sharp-cornered U drawn with one stroke, with one end cut at an angle. Minimal and technical.',
+  s:(f,a)=>`<path d="M12 4V52H52V10" fill="none" stroke="${f}" stroke-width="8" stroke-linejoin="miter"/><path d="M48 10L56 2V10Z" fill="${f}"/>`},
+ corner:{n:'12 · Split Corner',d:'An L and a bar separated by one clean diagonal gap at the base. Two parts, one U, with a sense of motion.',
+  s:(f,a)=>`<path d="M8 6H22V42H36L22 56H8Z" fill="${f}"/><path d="M42 6H56V56H28L42 42Z" fill="${f}"/>`},
+ cornerA:{n:'13 · Split Corner, accent',d:'As 12, with the right piece in accent. Two founders, two disciplines, one shape.',
+  s:(f,a)=>`<path d="M8 6H22V42H36L22 56H8Z" fill="${f}"/><path d="M42 6H56V56H28L42 42Z" fill="${a}"/>`},
+ contrast:{n:'14 · Contrast',d:'A thick left stem and a hairline right arm, like a high-contrast serif letter. Elegant and editorial.',
+  s:(f,a)=>`<path d="M6 6H24V38A12 12 0 0 0 48 38V6H54V38A24 24 0 0 1 6 38Z" fill="${f}"/>`},
+ wedge:{n:'15 · Flare',d:'Arms flare outward toward the top with sharp corners: opening up, growth. Like a fast "U" in a sports typeface.',
+  s:(f,a)=>`<path d="M2 4H22L23 36A9 9 0 0 0 41 36L42 4H62L54 38A22 22 0 0 1 10 38Z" fill="${f}"/>`},
+ rotate:{n:'16 · Lean-in',d:'A geometric round U rotated 12° clockwise: it leans into the next step. One shape, a lot of motion.',
+  s:(f,a)=>`<g transform="rotate(12 32 32)"><path d="M11 6H25V36A7 7 0 0 0 39 36V6H53V36A21 21 0 0 1 11 36Z" fill="${f}"/></g>`},
+ chisel:{n:'17 · Chisel',d:'A round U whose arm tops are chiselled at opposite 30° angles, like a broad-nib pen stroke. Sharp, but calm.',
+  s:(f,a)=>`<path d="M8 12L22 4V36A10 10 0 0 0 42 36V4L56 12V36A24 24 0 0 1 8 36Z" fill="${f}"/>`},
+ notchBase:{n:'18 · Base Notch',d:'A square U with a single sharp V-notch cut into the base at the right: a tiny "go" mark.',
+  s:(f,a)=>`<path d="M8 6H22V42H42V6H56V56H44L40 50L36 56H8Z" fill="${f}"/>`},
+ stairs:{n:'19 · Step-up',d:'A squared U whose right arm rises one step higher, with a sharp cut on top. Asymmetric, clean, "one step ahead".',
+  s:(f,a)=>`<path d="M8 16H22V42H42V4H50L56 10V56H8Z" fill="${f}"/>`},
+ knife:{n:'20 · Knife Edge',d:'A round U where the bowl thins to a knife edge at the bottom-right. Fluid on the left, sharp on the right.',
+  s:(f,a)=>`<path d="M8 6H22V36A10 10 0 0 0 42 36V6H56V30C56 46 46 58 30 58C17 58 8 49 8 36Z" fill="${f}"/>`},
+ hook:{n:'21 · Hook',d:'The right arm curls back in with a sharp terminal pointing down: a U that grabs. Distinctive and typographic.',
+  s:(f,a)=>`<path d="M8 6H22V36A10 10 0 0 0 42 36V6H56V36A24 24 0 0 1 8 36Z" fill="${f}"/><path d="M42 6H60L50 18H42Z" fill="${f}"/>`},
+ negSlash:{n:'22 · Slit',d:'A solid squared U with one thin oblique slit through the right arm. The cleanest possible break.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M38 30L60 8" stroke="#000" stroke-width="3"/></mask><path d="M8 6H22V42H42V6H56V56H8Z" fill="${f}" mask="url(#${i})"/>`},
+ pointer:{n:'23 · Pointer',d:'A U whose bottom-right corner extends into a sharp forward point, like a cursor or pointer. Direction without an arrow.',
+  s:(f,a)=>`<path d="M8 6H22V42H42V6H56V42L62 56H18L8 46Z" fill="${f}"/>`},
+ prism:{n:'24 · Prism',d:'A U made of two sharp triangular facets in two tones of one colour, as if lit from the left. Dimensional but still a single silhouette.',
+  s:(f,a)=>`<path d="M8 6H22V42L8 56Z" fill="${f}"/><path d="M8 56L22 42H42L56 56Z" fill="${f}" opacity=".72"/><path d="M42 6H56V56L42 42Z" fill="${f}" opacity=".5"/>`},
+};
+
+const V5VERD={"mitre": ["short", "→ A1. Clean, but static."], "mitreIn": ["rej", "Reads as \"W\"."], "oblique": ["rec", "→ B1/B2 (recommended family)."], "blade": ["short", "→ C1 / C2."], "bladeSq": ["park", "Awkward stem."], "lower": ["rej", "Reads as Cyrillic \"ц\". Fatal for a Bulgarian audience."], "lowerCut": ["rej", "Reads as \"ц\"."], "fold": ["park", "Crafted, but busy."], "iso": ["rej", "Messy at every size."], "tile": ["short", "→ G1 app icon."], "mono": ["park", "Too thin at 14 px."], "corner": ["short", "→ F1."], "cornerA": ["park", "Accent split adds noise."], "contrast": ["park", "Editorial, not tech."], "wedge": ["park", "Reads as \"V\"."], "rotate": ["rej", "Looks like it's falling over."], "chisel": ["park", "Subtle; sharpness lost at small sizes."], "notchBase": ["rej", "Reads as \"Ш\"/\"ц\"."], "stairs": ["short", "→ D1/D2 Step."], "knife": ["park", "Too subtle."], "hook": ["park", "Reads as Ŭ."], "negSlash": ["rec", "→ E1 / B2 Slit (recommended)."], "pointer": ["rej", "Reads as Cyrillic \"Ц\"."], "prism": ["park", "Dimensional, but three tones."]};
+const EXPLORE5=Object.entries(M5).map(([k,m])=>[m.n,V5VERD[k][0],V5VERD[k][1],(f,a)=>m.s(f,a,uid())]);
+const M6 = {
+ s01:{n:'S01 · Spear (v2 original)',d:'The reference: the right arm rises to a 45° point, with the tip in signal.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V14L54 0V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 14L54 0V14Z" fill="${a}"/>`},
+ s02:{n:'S02 · Spear, one colour',d:'Same form, no accent: the shape alone carries the direction.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V14L54 0V36A22 22 0 0 1 10 36Z" fill="${f}"/>`},
+ s03:{n:'S03 · High Spear',d:'The point rises higher (≈55°). More ambition, more lift.',
+  s:(f,a)=>`<path d="M10 22H24V40A8 8 0 0 0 40 40V22L54 2V40A22 22 0 0 1 10 40Z" fill="${f}"/><path d="M40 22L54 2V22Z" fill="${a}"/>`},
+ s04:{n:'S04 · Low Spear',d:'A shallow 30° rise. Quieter and more corporate; the direction is a hint.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V14L54 6V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 14L54 6V14Z" fill="${a}"/>`},
+ s05:{n:'S05 · Steep Spear',d:'A 60° cut, almost a blade. The most energetic rise.',
+  s:(f,a)=>`<path d="M10 28H24V40A8 8 0 0 0 40 40V28L54 2V40A22 22 0 0 1 10 40Z" fill="${f}"/><path d="M40 28L54 2V28Z" fill="${a}"/>`},
+ s07:{n:'S07 · Inner Point',d:'The point sits on the inner edge: the spear aims across the counter, at the centre.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V0L54 14V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 0L54 14H40Z" fill="${a}"/>`},
+ s08:{n:'S08 · Detached Tip',d:'The tip is separated from the arm by one clean gap. It reads as "launched".',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V17H54V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 14L54 0V14Z" fill="${a}"/>`},
+ s09:{n:'S09 · Launched Tip',d:'A detached tip, nudged up and forward: momentum in progress.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V17H54V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M43 11L57 -3V11Z" fill="${a}"/>`},
+ s10:{n:'S10 · Mitred Spear',d:'The spear on a mitred, angular bowl. Engineered, crisp, all straight lines.',
+  s:(f,a)=>`<path d="M10 14H24V42H40V14L54 0V46L44 56H20L10 46Z" fill="${f}"/><path d="M40 14L54 0V14Z" fill="${a}"/>`},
+ s11:{n:'S11 · Square Spear',d:'A fully square U with the spear. The most architectural; reads as a building or a column.',
+  s:(f,a)=>`<path d="M10 14H24V42H40V14L54 0V56H10Z" fill="${f}"/><path d="M40 14L54 0V14Z" fill="${a}"/>`},
+ s12:{n:'S12 · Light Spear',d:'Lighter arms (10 units): finer, more elegant, more "consultancy".',
+  s:(f,a)=>`<path d="M14 14H24V36A8 8 0 0 0 40 36V14L50 4V36A18 18 0 0 1 14 36Z" fill="${f}"/><path d="M40 14L50 4V14Z" fill="${a}"/>`},
+ s13:{n:'S13 · Heavy Spear',d:'Heavier arms (18 units): bold, sturdy, the most visible at small sizes.',
+  s:(f,a)=>`<path d="M6 18H24V36A8 8 0 0 0 40 36V18L58 0V36A26 26 0 0 1 6 36Z" fill="${f}"/><path d="M40 18L58 0V18Z" fill="${a}"/>`},
+ s14:{n:'S14 · Wide Spear',d:'Wider counter, more open U: generous, welcoming, room to build.',
+  s:(f,a)=>`<path d="M6 16H20V36A12 12 0 0 0 44 36V16L58 2V36A26 26 0 0 1 6 36Z" fill="${f}"/><path d="M44 16L58 2V16Z" fill="${a}"/>`},
+ s15:{n:'S15 · Graded Spear',d:'Both arms cut in the same direction, the left one slightly and the right one fully: acceleration.',
+  s:(f,a)=>`<path d="M10 14L24 9V36A8 8 0 0 0 40 36V14L54 0V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 14L54 0V14Z" fill="${a}"/>`},
+ s16:{n:'S16 · Blade Sliver',d:'Only a thin sliver along the cut edge is in signal: the sharpest, most refined accent.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V19L54 5V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 14L54 0V3L40 17Z" fill="${a}"/>`},
+ s17:{n:'S17 · Ghost Tip',d:'The tip is drawn as an outline: the direction is shown, not filled in yet.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V14H54V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M41.5 12.5L52.5 1.5V12.5Z" fill="none" stroke="${a}" stroke-width="3" stroke-linejoin="miter"/>`},
+ s18:{n:'S18 · Taper Spear',d:'The bowl thins toward the spear side, so the whole shape flows up into the point.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V14L54 0V30C54 47 44 58 30 58C18 58 10 48 10 36Z" fill="${f}"/><path d="M40 14L54 0V14Z" fill="${a}"/>`},
+ s19:{n:'S19 · Spear Tile',d:'The spear U knocked out of a rounded square, with the tip in signal. The app icon.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M18 22H26V38A6 6 0 0 0 38 38V22L46 14V38A14 14 0 0 1 18 38Z" fill="#000"/></mask><rect x="2" y="2" width="60" height="60" rx="14" fill="${f}" mask="url(#${i})"/><path d="M38 22L46 14V22Z" fill="${a}"/>`},
+ s20:{n:'S20 · Shoulder Break',d:'A clean horizontal gap separates both arms from the bowl; the spear arm stands on its own.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><rect x="0" y="31" width="64" height="3" fill="#000"/></mask><path d="M10 14H24V36A8 8 0 0 0 40 36V14L54 0V36A22 22 0 0 1 10 36Z" fill="${f}" mask="url(#${i})"/><path d="M40 14L54 0V14Z" fill="${a}"/>`},
+ s21:{n:'S21 · Arrowhead',d:'The tip flares wider than the arm into a true arrowhead pointing up-right.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V18H54V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M36 12L60 0L50 24Z" fill="${a}"/>`},
+ s22:{n:'S22 · Needle',d:'The arm steps in at a shoulder and rises into a long, thin needle point. Precise and surgical.',
+  s:(f,a)=>`<path d="M10 22H24V42A8 8 0 0 0 40 42V22H46L54 0V42A22 22 0 0 1 10 42Z" fill="${f}"/><path d="M46 22L54 0V22Z" fill="${a}"/>`},
+ s24:{n:'S24 · Speed Line',d:'The spear with one thin parallel slit inside the tip, like a speed line. Motion without italics.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M44 20L58 6" stroke="#000" stroke-width="2.4"/></mask><path d="M10 14H24V36A8 8 0 0 0 40 36V14L54 0V36A22 22 0 0 1 10 36Z" fill="${f}" mask="url(#${i})"/><path d="M40 14L54 0V14Z" fill="${a}" mask="url(#${i})"/>`},
+ s26:{n:'S26 · Faceted Tip',d:'The tip split into two facets (signal + deep signal), like a cut gem or a pyramid point.',
+  s:(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V14L54 0V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 14L54 0L49 14Z" fill="${a}"/><path d="M49 14L54 0V14Z" fill="${a}" opacity=".6"/>`},
+ s27:{n:'S27 · Outline Spear',d:'The spear drawn as a single outline: technical, blueprint-like. A secondary/pattern use.',
+  s:(f,a)=>`<path d="M11.5 15.5H22.5V36A9.5 9.5 0 0 0 41.5 36V14.6L52.5 3.6V36A20.5 20.5 0 0 1 11.5 36Z" fill="none" stroke="${f}" stroke-width="3"/><path d="M41.5 14.6L52.5 3.6V14.6Z" fill="${a}"/>`},
+};
+
+const V6VERD={"s01": ["short", "The v2 original: still strong; evolved into R1."], "s02": ["short", "→ R1m one-colour version."], "s03": ["rec", "Higher tip → R1 Spear Pro (recommended)."], "s04": ["park", "Too timid; the direction gets lost."], "s05": ["park", "Reads as a pen nib."], "s07": ["park", "Fang-like, aims inward."], "s08": ["short", "→ R6 Launch."], "s09": ["short", "→ R6 Launch."], "s10": ["short", "→ R2 Mitred Spear."], "s11": ["park", "Architectural; a bit like a column."], "s12": ["park", "Elegant, but weak at 14 px."], "s13": ["rec", "Heavier weight → R1 Spear Pro."], "s14": ["park", "Generous, but a little soft."], "s15": ["short", "→ R3 Graded."], "s16": ["short", "→ R4 Sliver."], "s17": ["rej", "The ghost tip is too weak."], "s18": ["park", "Subtle taper; lost when small."], "s19": ["short", "→ R8 app icon."], "s20": ["rej", "The shoulder gap echoes a horseshoe magnet."], "s21": ["rej", "Becomes a literal paper-plane arrow."], "s22": ["short", "→ R5 Needle."], "s24": ["park", "Speed line is nice, but adds a part."], "s26": ["short", "→ R7 Faceted."], "s27": ["park", "For pattern and secondary use only."]};
+const EXPLORE6=Object.entries(M6).map(([k,m])=>[m.n,V6VERD[k][0],V6VERD[k][1],(f,a)=>m.s(f,a,uid())]);
+const SB="M8 22H24V40A8 8 0 0 0 40 40V22L56 4V40A24 24 0 0 1 8 40Z", ST="M40 22L56 4V22Z";
+const M7 = {
+ check:{n:'01 · Check Spear',eng:'Fusion: U + ✓',d:'The left arm drops and slopes, so the silhouette reads as both a U and a tick: "approved momentum", governance signed off.',
+  s:(f,a)=>`<path d="M8 30L24 38V40A8 8 0 0 0 40 40V22L56 4V40A24 24 0 0 1 8 40Z" fill="${f}"/><path d="${ST}" fill="${a}"/>`},
+ fold:{n:'02 · Folded Tip',eng:'Construction: paper fold',d:'The tip is a folded flap, with a crease visible beneath it. A policy page turning forward; crafted, not generated.',
+  s:(f,a)=>`<path d="${SB}" fill="${f}"/><path d="M40 22L56 4V8.5L44 22Z" fill="${a}" opacity=".45"/><path d="M38.6 20.6L54.6 2.6V20.6Z" fill="${a}"/>`},
+ breakout:{n:'03 · Breakout',eng:'Negative space + action',d:'The U sits inside a governance frame, and its spear blade pierces the corner and goes beyond it. Structure that enables, not cages.',
+  s:(f,a,i)=>`<mask id="${i}"><rect x="-4" y="-4" width="72" height="72" fill="#fff"/><path d="M40 26L54 4" stroke="#000" stroke-width="9"/></mask><rect x="4.5" y="13.5" width="43" height="47" fill="none" stroke="${f}" stroke-width="3" mask="url(#${i})"/><path d="M13 26H23V44A5 5 0 0 0 33 44V26L43 26V44A15 15 0 0 1 13 44Z" fill="${f}"/><path d="M33 26L60 0L43 26Z" fill="${a}"/>`},
+ peak:{n:'04 · Peak',eng:'Fusion: spear + mountain',d:'The tip becomes a summit with a snow line: Musala, Bulgaria\'s highest peak. Local pride and ascent in one point.',
+  s:(f,a)=>`<path d="M8 22H24V40A8 8 0 0 0 40 40V22L50 4L56 12V40A24 24 0 0 1 8 40Z" fill="${f}"/><path d="M45.2 12.6L50 4L55 10.7L52.6 13L50.5 11L48 14.2Z" fill="${a}"/>`},
+ needle:{n:'05 · Compass Needle',eng:'Fusion: spear + compass',d:'The tip becomes a two-tone compass needle standing on the arm. Direction, literally, but abstract.',
+  s:(f,a)=>`<path d="M8 22H24V40A8 8 0 0 0 40 40V22H56V40A24 24 0 0 1 8 40Z" fill="${f}"/><path d="M42 22L60 0L50 22Z" fill="${a}"/><path d="M50 22L60 0L56 22Z" fill="${a}" opacity=".5"/>`},
+ counter:{n:'06 · Counter Arrow',eng:'Negative space',d:'The arms lean in, so the empty counter becomes an upward spear while the outer arm still rises to a point: two spears, one positive and one negative.',
+  s:(f,a)=>`<path d="M8 12H31L24 40A8 8 0 0 0 40 40L33 12L56 0V40A24 24 0 0 1 8 40Z" fill="${f}"/><path d="M33 12L56 0V12Z" fill="${a}"/>`},
+ echo:{n:'07 · Echo',eng:'Construction: offset trail',d:'A single offset outline trails the spear: motion shown by a trace, not by italics. Calm shape, kinetic system.',
+  s:(f,a)=>`<path d="${SB}" fill="none" stroke="${a}" stroke-width="1.6" transform="translate(-5 5)" opacity=".8"/><path d="${SB}" fill="${f}"/><path d="${ST}" fill="${a}"/>`},
+ contrast:{n:'08 · Contrast',eng:'Construction: stroke contrast',d:'A type-designer\'s U: a heavy left stem (governance), a thinner bowl, and a lean right blade (momentum). Reads crafted and editorial.',
+  s:(f,a)=>`<path d="M5 22H24V40A8 8 0 0 0 40 40V22L54 6V40A24.5 18 0 0 1 5 40Z" fill="${f}"/><path d="M40 22L54 6V22Z" fill="${a}"/>`},
+ squircle:{n:'09 · Squircle',eng:'Construction: superellipse',d:'The bowl is a superellipse: flat-bottomed, tense, engineered. Its silhouette is unlike a font\'s U, which makes it more ownable.',
+  s:(f,a)=>`<path d="M8 22H24V40C24 46 26 48 32 48C38 48 40 46 40 40V22L56 4V40C56 56 48 60 32 60C16 60 8 56 8 40Z" fill="${f}"/><path d="${ST}" fill="${a}"/>`},
+ inktrap:{n:'10 · Ink Trap',eng:'Construction: typographic craft',d:'Tiny ink-trap notches where the arms meet the bowl: a detail from type design that shows craft up close and stays invisible far away.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M24 33L28 41H24ZM40 33L36 41H40Z" fill="#000"/></mask><path d="${SB}" fill="${f}" mask="url(#${i})"/><path d="${ST}" fill="${a}"/>`},
+ kite:{n:'11 · Kite',eng:'Fusion: spear + kite/diamond',d:'A diamond lifts off the right arm on a short neck: an idea flying, still tethered. Playful but precise.',
+  s:(f,a)=>`<path d="M8 22H24V40A8 8 0 0 0 40 40V28H56V40A24 24 0 0 1 8 40Z" fill="${f}"/><rect x="46" y="18" width="4" height="10" fill="${f}"/><path d="M48 1L57 10L48 19L39 10Z" fill="${a}"/>`},
+ cyr:{n:'12 · U + У',eng:'Monogram + meaning (bilingual)',d:'The spear U gains a short tail at the bottom left, like the Cyrillic У. It reads U to EU buyers and У to Bulgarians: Устрема and Ustrema in one glyph.',
+  s:(f,a)=>`<path d="${SB}" fill="${f}"/><path d="M15 55L5 64H18L23 59Z" fill="${f}"/><path d="${ST}" fill="${a}"/>`},
+ layers:{n:'13 · Layers',eng:'Construction: nested strokes',d:'Three nested Us, all cut by one rising line, so each right arm stands higher: layers of governance moving up together.',
+  s:(f,a,i)=>`<clipPath id="${i}"><path d="M-2 64V28L66 -6V64Z"/></clipPath><g clip-path="url(#${i})" fill="none" stroke-width="6"><path d="M7 0V38A25 25 0 0 0 57 38V0" stroke="${f}"/><path d="M17 0V38A15 15 0 0 0 47 38V0" stroke="${f}"/><path d="M27 0V38A5 5 0 0 0 37 38V0" stroke="${a}"/></g>`},
+ quill:{n:'14 · Quill',eng:'Fusion: spear + pen nib',d:'The tip carries a nib slit and breather hole: policies written, decisions signed. Governance as authorship.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M56 4L47.5 14" stroke="#000" stroke-width="1.7"/><circle cx="46.5" cy="15.5" r="2" fill="#000"/></mask><path d="${SB}" fill="${f}"/><path d="${ST}" fill="${a}" mask="url(#${i})"/>`},
+ shards:{n:'15 · Shards',eng:'Construction: cut planes',d:'The spear U is cut into three planes by two parallel 45° hairlines: precise, engineered, like cut steel.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M0 58L26 32M38 64L64 38" stroke="#000" stroke-width="2.2"/></mask><path d="${SB}" fill="${f}" mask="url(#${i})"/><path d="${ST}" fill="${a}"/>`},
+ brush:{n:'16 · Brush',eng:'Construction: calligraphic stroke',d:'Drawn like one broad-nib stroke: the weight swells in the bowl and whips up into the spear. Human, energetic, still upright.',
+  s:(f,a)=>`<path d="M9 20C14 18 21 18 24 21V40A8 8 0 0 0 40 40V25L59 1C57 18 56.5 30 56.5 40A24.5 24 0 0 1 8 40C8 31 8.5 25 9 20Z" fill="${f}"/><path d="M40 25L59 1L55.6 22.5Z" fill="${a}"/>`},
+ cursor:{n:'17 · Cursor',eng:'Fusion: spear + pointer',d:'The tip is a mouse-pointer arrow aimed up and right: building, clicking, shipping. A digital product action.',
+  s:(f,a)=>`<path d="M8 22H24V40A8 8 0 0 0 40 40V24H56V40A24 24 0 0 1 8 40Z" fill="${f}"/><path d="M59 1L38 9L46 14L42 24L48 26.5L52 16.5L59 22Z" fill="${a}"/>`},
+ surge:{n:'18 · Surge',eng:'Fusion: spear + wave (устрем)',d:'The right side rises like a wave crest curling forward: устрем as a surge of water. The most "name-native" metaphor.',
+  s:(f,a,i)=>`<clipPath id="${i}"><rect x="38" y="-4" width="30" height="26"/></clipPath><path d="M8 22H24V40A8 8 0 0 0 40 40V28C40 16 48 8 61 3C55 12 56 24 56 40A24 24 0 0 1 8 40Z" fill="${f}"/><path d="M8 22H24V40A8 8 0 0 0 40 40V28C40 16 48 8 61 3C55 12 56 24 56 40A24 24 0 0 1 8 40Z" fill="${a}" clip-path="url(#${i})"/>`},
+ shevitsa:{n:'19 · Шевица',eng:'Monogram + culture',d:'The spear U stitched on a grid like Bulgarian embroidery (шевица), with the tip in signal thread. Heritage meets pixels.',
+  s:(f,a)=>{let o='';const P=new Path2D(SB),T=new Path2D(ST),c=document.createElement('canvas').getContext('2d');for(let y=0;y<16;y++)for(let x=0;x<16;x++){const px=x*4+2,py=y*4+2;if(c.isPointInPath(P,px,py)){const t=c.isPointInPath(T,px,py);o+=`<rect x="${x*4+.4}" y="${y*4+.4}" width="3.2" height="3.2" fill="${t?a:f}"/>`}}return o}},
+ overlay:{n:'20 · Overlay',eng:'Construction: transparency',d:'A plain U and a spear triangle overlap; where they meet, a third tone appears. Two disciplines combine into something new.',
+  s:(f,a)=>`<path d="M8 22H24V40A8 8 0 0 0 40 40V22H56V40A24 24 0 0 1 8 40Z" fill="${f}"/><path d="M34 34L60 2V34Z" fill="${a}" opacity=".75"/>`},
+ tile:{n:'21 · Tile Breakout',eng:'Negative space + action',d:'The spear U is cut out of an app tile, and its blade breaks out of the tile\'s corner. Born as an icon, with a story.',
+  s:(f,a,i)=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M13 22H22V42A6 6 0 0 0 34 42V22H43V42A15 15 0 0 1 13 42Z" fill="#000"/><path d="M33 23L52 4" stroke="#000" stroke-width="8"/></mask><rect x="2" y="10" width="52" height="52" rx="13" fill="${f}" mask="url(#${i})"/><path d="M34 22L61 0L43 22Z" fill="${a}"/>`},
+};
+
+const V7VERD={"check": ["short", "→ R3. Fusion works; risk of reading as J."], "fold": ["park", "Barely different from the Spear; the fold doesn't read."], "breakout": ["short", "Strong story; busy as a main mark → used for the R7 tile."], "peak": ["park", "Musala nod is lovely, but the snow line is lost below 32 px."], "needle": ["park", "Compass reads; the two-tone needle is fussy."], "counter": ["rej", "The counter reads as a fang or tooth."], "echo": ["park", "The trail is kinetic, but messy on dark."], "contrast": ["park", "Crafted; subtle gain."], "squircle": ["short", "→ R2 (Surge + Squircle)."], "inktrap": ["park", "Invisible below 48 px."], "kite": ["rej", "Reads as 'i' or 'Ů'."], "cyr": ["short", "→ R8. Bilingual У; EU readers may see 'y'."], "layers": ["park", "Striking, but multi-stroke; echoes the v4 ripple."], "quill": ["short", "→ R4."], "shards": ["park", "Cut-steel feel; hairlines vanish when small."], "brush": ["short", "→ R5."], "cursor": ["rej", "Clip-art pointer."], "surge": ["rec", "→ R1 Surge (recommended): устрем = surge."], "shevitsa": ["short", "→ R6 (8×8 grid)."], "overlay": ["rej", "The blend washes out on light backgrounds."], "tile": ["short", "→ R7 Tile Breakout (icon)."]};
+const EXPLORE7=Object.entries(M7).map(([k,m])=>[m.n+' · <i>'+m.eng+'</i>',V7VERD[k][0],V7VERD[k][1],(f,a)=>m.s(f,a,uid())]);
+const EXPLORE3 = [
+ ['C01 · Slice','rec','→ S1. Whole U, one 45° cut. Best one-colour mark.',(f,a)=>msk(i=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M64 -4L-6 66" stroke="#000" stroke-width="4"/></mask><path d="${UP}" fill="${f}" mask="url(#${i})"/>`)],
+ ['C02 · Slice Duo','rej','Accent splits awkwardly across both arms.',(f,a)=>msk(i=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M66 -4L-4 66" stroke="#000" stroke-width="4"/></mask><clipPath id="c${i}"><path d="M0 0H64L0 64Z"/></clipPath><g mask="url(#${i})"><path d="${UP}" fill="${f}"/><path d="${UP}" fill="${a}" clip-path="url(#c${i})"/></g>`)],
+ ['C03 · Split Rise','rec','→ S4 (recommended) and S6. Balanced, with a step ahead.',(f,a)=>`<path d="M10 12H24V40A8 8 0 0 0 30.5 47.9V62A22 22 0 0 1 10 40Z" fill="${f}"/><path d="M33.5 41.9A8 8 0 0 0 40 34V6H54V34A22 22 0 0 1 33.5 56Z" fill="${a}"/>`],
+ ['C04 · Stencil','rej','Reads as a horseshoe magnet.',(f,a)=>msk(i=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><rect x="0" y="31" width="64" height="4" fill="#000"/></mask><path d="${UP}" fill="${f}" mask="url(#${i})"/><rect x="40" y="8" width="14" height="5" fill="${a}"/>`)],
+ ['C05 · Keyhole','rej','Reads as "W" or a crown at small sizes.',(f,a)=>msk(i=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M24 64L32 50L40 64Z" fill="#000"/></mask><path d="${UP}" fill="${f}" mask="url(#${i})"/><path d="M40 8H54L40 22Z" fill="${a}"/>`)],
+ ['C06 · Ascent','short','→ S9. Symmetric aim; a little generic.',(f,a)=>`<path d="${UP}" fill="${f}"/><path d="M25.5 40L32 24L38.5 40Z" fill="${a}"/>`],
+ ['C07 · Twin Cut','short','→ S7. Calm, parallel motion.',(f,a)=>`<path d="M10 14L24 0V36A8 8 0 0 0 40 36V14L54 0V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 14L54 0V14Z" fill="${a}"/>`],
+ ['C08 · Chamfer','park','Architectural, but reads as a cup or bucket.',(f,a)=>`<path d="M10 8H24V40L28 44H36L40 40V8H54V46L42 58H22L10 46Z" fill="${f}"/><path d="M40 8H54V12L44 22H40Z" fill="${a}"/>`],
+ ['C09 · Break','park','Too close to the v2 Spear.',(f,a)=>`<path d="M10 8H24V36A8 8 0 0 0 40 36V26L54 12V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 20L54 6V2H40Z" fill="${a}"/>`],
+ ['C10 · Inline Lane','park','Elegant, but the lane dies below 24 px; magnet echo.',(f,a)=>msk(i=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M17 0V36A15 15 0 0 0 47 36V0" fill="none" stroke="#000" stroke-width="3"/></mask><path d="${UP}" fill="${f}" mask="url(#${i})"/><path d="M45.5 0H48.5V12H45.5Z" fill="${a}"/>`)],
+ ['C11 · Duo','rej','Equal-height halves = red/blue horseshoe magnet. The step in C03 breaks this.',(f,a)=>`<path d="M10 8H24V36A8 8 0 0 0 31 43.9V58A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M33 43.9A8 8 0 0 0 40 36V8H54V36A22 22 0 0 1 33 58Z" fill="${a}"/>`],
+ ['C12 · Keel','rej','Reads as "V".',(f,a)=>`<path d="M10 8H24V38L32 46L40 38V8H54V44L32 62L10 44Z" fill="${f}"/><path d="M40 8H54V14L46 22H40Z" fill="${a}"/>`],
+ ['C13 · Step','rej','Reads as "J" + U.',(f,a)=>`<path d="M10 20H24V36A8 8 0 0 0 40 36V12H54V36A22 22 0 0 1 10 36Z" fill="${f}"/><rect x="40" y="2" width="14" height="6" fill="${a}"/>`],
+ ['C14 · Tile','park','Good app icon, but weak as a logo.',(f,a)=>msk(i=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><path d="M20 12H27V34A5 5 0 0 0 37 34V12H44V34A12 12 0 0 1 20 34Z" fill="#000"/></mask><path d="M4 4H44L60 20V60H4Z" fill="${f}" mask="url(#${i})"/><path d="M48 4H60V16Z" fill="${a}"/>`)],
+ ['C15 · Focus','rej','Reads as a face or owl.',(f,a)=>`<path d="M10 2L24 12V36A8 8 0 0 0 40 36V12L54 2V36A22 22 0 0 1 10 36Z" fill="${f}"/><circle cx="32" cy="22" r="4" fill="${a}"/>`],
+ ['C16 · Target','rej','The dot reads as a face or "¡".',(f,a)=>msk(i=>`<mask id="${i}"><rect width="64" height="64" fill="#fff"/><circle cx="32" cy="51" r="4" fill="#000"/></mask><path d="${UP}" fill="${f}" mask="url(#${i})"/><path d="M40 8H54L40 22Z" fill="${a}"/>`)],
+ ['C17 · Shift','park','Kinetic glitch, but with the cap it reads as a magnet.',(f,a)=>msk(i=>`<clipPath id="t${i}"><rect width="64" height="28"/></clipPath><clipPath id="b${i}"><rect y="31" width="64" height="33"/></clipPath><path d="${UP}" fill="${f}" clip-path="url(#b${i})"/><g transform="translate(5 0)"><path d="${UP}" fill="${f}" clip-path="url(#t${i})"/><rect x="40" y="8" width="14" height="4" fill="${a}"/></g>`)]
+];
+const EXPLORE = [
+ ['01 · Notch','rej','Wedge too small; disappears below 24 px.',(f,a)=>`<path d="M10 8H24V36A8 8 0 0 0 40 36V8H44L54 18V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M48 8H54V14Z" fill="${a}"/>`],
+ ['02 · Notch Pro','short','Became R4. Inspo-faithful, calm, legible.',(f,a)=>`<path d="M10 8H24V36A8 8 0 0 0 40 36V22L54 8V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M44 2H58L44 16Z" fill="${a}"/>`],
+ ['03 · Rise','park','Clear "growth" read, but looks like an upload icon.',(f,a)=>`<path d="M10 8H24V36A8 8 0 0 0 40 36V22H54V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M35 22L47 4L59 22Z" fill="${a}"/>`],
+ ['04 · Spear','rec','Became R1. The arm becomes the arrow.',(f,a)=>`<path d="M10 14H24V36A8 8 0 0 0 40 36V14L54 0V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M40 14L54 0V14Z" fill="${a}"/>`],
+ ['05 · Aim','rej','Chevron reads as a crown or "Û".',(f,a)=>`<path d="M10 8H24V36A8 8 0 0 0 40 36V8H54V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M24 16L32 6L40 16" fill="none" stroke="${a}" stroke-width="6"/>`],
+ ['06 · Lean','park','Speed via italics; fed into R3.',(f,a)=>`<g transform="skewX(-12) translate(8 0)"><path d="M10 8H24V36A8 8 0 0 0 40 36V8H44L54 18V36A22 22 0 0 1 10 36Z" fill="${f}"/><path d="M48 8H54V14Z" fill="${a}"/></g>`],
+ ['07 · Dash','rej','Speed lines read as delivery/courier clip art.',(f,a)=>`<g transform="translate(8 0)"><path d="M10 8H24V36A8 8 0 0 0 40 36V8H54V36A22 22 0 0 1 10 36Z" fill="${f}"/></g><rect x="0" y="26" width="12" height="5" fill="${a}"/><rect x="4" y="36" width="10" height="5" fill="${a}" opacity=".6"/><rect x="8" y="46" width="8" height="5" fill="${a}" opacity=".35"/>`],
+ ['08 · Route','park','Nice journey story, but the dot reads as an "i".',(f,a)=>`<circle cx="15" cy="10" r="6" fill="${f}"/><path d="M15 16V38A15 15 0 0 0 45 38V20" fill="none" stroke="${f}" stroke-width="10"/><path d="M33 22L45 6L57 22Z" fill="${a}"/>`],
+ ['09 · Prompt','short','Became R6; best as the wordmark cursor.',(f,a)=>`<path d="M4 6H17V34A7 7 0 0 0 31 34V6H44V34A20 20 0 0 1 4 34Z" fill="${f}"/><rect x="48" y="50" width="14" height="6" fill="${a}"/>`],
+ ['10 · Exit','rej','Most kinetic, but check-mark/swoosh risk.',(f,a)=>`<path d="M14 6V34A14 14 0 0 0 38 44L52 22" fill="none" stroke="${f}" stroke-width="12" stroke-linejoin="round"/><path d="M42 12L62 6L58 26Z" fill="${a}"/>`],
+ ['11 · Lock-on','park','Not a logo, but kept as the Scan/findings frame device.',(f,a)=>`<path d="M18 14H27V36A5 5 0 0 0 37 36V14H46V36A14 14 0 0 1 18 36Z" fill="${f}"/><path d="M4 16V4H16M48 4H60V16M60 48V60H48M16 60H4V48" fill="none" stroke="${a}" stroke-width="4"/>`],
+ ['12 · Double-lane','park','Distinctive but static, no direction.',(f,a)=>`<path d="M8 6H18V36A14 14 0 0 0 46 36V6H56V36A24 24 0 0 1 8 36Z" fill="${f}"/><path d="M24 6H30V36A2 2 0 0 0 34 36V6H40V36A8 8 0 0 1 24 36Z" fill="${a}"/>`]
+];
+const TAGLINES = [
+  ['Momentum with direction.','Устрем с посока.','Recommended: it is the name\'s own meaning'],
+  ['Build fast. Stay in control.','Създавайте бързо. Останете в контрол.','Most concrete for buyers'],
+  ['Power Platform, governed.','Power Platform под контрол.','Descriptive, also works as a sub-line'],
+  ['Low-code without the chaos.','Low-code без хаос.','Punchy, slightly informal'],
+  ['Drive, with guardrails.','Устрем, с предпазни релси.','Literal translation of the logo']
+];
+const VOICE = {
+ en:[['We deliver comprehensive, end-to-end Power Platform governance solutions leveraging best practices.','We map every environment, maker and connector in your tenant in two weeks, then fix the riskiest ten things first.'],
+     ['Copilot is a huge security risk you must address now!','Copilot doesn\'t create oversharing. It finds what\'s already overshared, faster. Let\'s fix that before you switch it on.'],
+     ['Unlock the power of digital transformation with innovative low-code.','Your team built 400 apps. Let\'s make sure the 40 that matter are owned, secured and in production properly.'],
+     ['We are a leading Microsoft partner in Bulgaria.','We\'re a senior Microsoft practice in Sofia. Here\'s what we\'ve certified.']],
+ bg:[['Предлагаме иновативни решения за цялостна дигитална трансформация.','За две седмици картографираме всяка среда, всеки създател и всеки конектор във Вашия tenant, и започваме с десетте най-рискови неща.'],
+     ['Copilot е огромен риск за сигурността Ви!','Copilot не създава прекомерен достъп — той просто го открива по-бързо. Нека го оправим, преди да го включите.'],
+     ['Отключете силата на low-code платформите.','Екипът Ви е създал 400 приложения. Нека се уверим, че 40-те важни имат собственик, защита и са в продукция както трябва.'],
+     ['Ние сме водещ Microsoft партньор в България.','Ние сме Microsoft практика от София. Ето какво сме сертифицирали.']]
+};
+const DIALS = [['Formal','Casual',35],['Serious','Playful',22],['Technical','Plain',55],['Modest','Bold',62]];
+const OFFERS = [
+  ['Govern','Governance Scan','Environment inventory, maker and permission map, connector/DLP review, ALM hygiene, Copilot and agent exposure. Report + 90-day backlog.','2–3 weeks','fixed scope',true],
+  ['Govern','Licence Check & CoE Kit Exit','Quick wins: Managed Environments licence check before the Feb 2027 enforcement; migration off the retired CoE Starter Kit to the native admin center.','1–3 weeks','fixed scope'],
+  ['Govern','Guardrails Sprint','Environment strategy, Managed Environments, DLP design, maker restrictions, pipelines, Purview labels.','4–8 weeks','S / M / L fixed'],
+  ['Govern','Governance-as-a-Service','Governance run for you on the native admin center (CoE Starter Kit retired May 2026): monthly inventory, cleanup, onboarding, exceptions, quarterly report. Essential / Standard / Regulated.','monthly','fixed scope'],
+  ['Scale with AI','Copilot & Agent Readiness','Oversharing review, sensitivity labels, Copilot Studio agent governance, pilot design and adoption metrics.','3–4 weeks','fixed'],
+  ['Build','Build Sprint','One use case to production: Power Apps / Power Automate / Dataverse / Power Pages, governance-ready from day one.','4–6 weeks','fixed'],
+  ['Build','Power BI Quickstart','One domain from source to governed dashboard, semantic model and RLS included.','2 weeks','fixed'],
+  ['Build','Dynamics 365 Second Opinion','Independent review of a stuck Business Central / CE / Power Platform project. We are not the incumbent.','1 week','fixed'],
+  ['Run','Support · Team extension · CSP','SLA support bundles; certified bench for SIs; licence right-sizing → CSP later.','ongoing','T&M / retainer']
+];
+const SISTERS = [];
+/* Competitor data: filled from 02-market-research (see COMPETITORS_JSON below) */
+let COMPETITORS = [];
+let HUES = [];
+let PATTERNS = [];
+let MARKET_KPIS = [];
+
+/* ================= STATE ================= */
+const KEY='ustrema-guide-v9';
+const store=(()=>{try{localStorage.setItem('_t','1');localStorage.removeItem('_t');return localStorage}catch(e){const m={};return{getItem:k=>m[k]??null,setItem:(k,v)=>m[k]=v}}})();
+let S = JSON.parse(store.getItem(KEY)||'{}');
+S.pal=PALETTES[S.pal]?S.pal:'O'; S.logo=LOGOS[S.logo]?S.logo:'m04'; S.type=TYPES[S.type]?S.type:'manrope';
+const save=()=>store.setItem(KEY,JSON.stringify(S));
+{const q=new URLSearchParams(location.search);if(PALETTES[q.get('pal')])S.pal=q.get('pal');if(LOGOS[q.get('logo')])S.logo=q.get('logo');if(TYPES[q.get('type')])S.type=q.get('type');}
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const P=()=>PALETTES[S.pal];
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');setTimeout(()=>e.classList.remove('on'),1600)}
+
+/* ================= HELPERS ================= */
+function markSVG(size,c1,c2,key){const L=LOGOS[key||S.logo];return `<svg width="${size}" height="${size}" viewBox="0 0 64 64" style="flex-shrink:0" aria-label="Ustrema mark">${L.mark(c1,c2)}</svg>`}
+function wordmark(txt,size,color,cursor){return `<span style="font-family:'Manrope',var(--display);font-weight:800;font-size:${size}px;letter-spacing:-.035em;color:${color};line-height:1;white-space:nowrap">${txt}${cursor?`<span class="cursor" style="color:${cursor}">_</span>`:''}</span>`}
+function lockup(kind,size,c1,c2,txtc){
+  const m=markSVG(size*1.12,c1,c2), gap=size*.36;
+  const row=(inner,mk=m)=>`<div style="display:flex;align-items:center;gap:${gap}px">${mk}${inner}</div>`;
+  if(kind==='s')return `<div style="display:flex;flex-direction:column;align-items:center;gap:${size*.3}px">${markSVG(size*1.7,c1,c2)}${wordmark('Ustrema',size,txtc)}</div>`;
+  if(kind==='m')return markSVG(size*2.4,c1,c2);
+  if(kind==='cy')return row(wordmark('Устрема',size,txtc));
+  if(kind==='caps')return `<div style="display:flex;align-items:center;gap:${gap}px">${m}<span style="font-family:'Manrope';font-weight:700;font-size:${size*.72}px;letter-spacing:.16em;color:${txtc};white-space:nowrap">USTREMA</span></div>`;
+  if(kind==='sig')return row(wordmark('Ustrema',size,txtc,c2));
+  if(kind==='bi')return `<div style="display:flex;align-items:center;gap:${gap*1.3}px">${markSVG(size*1.9,c1,c2)}<div>${wordmark('Ustrema',size,txtc,c2)}<div style="font-family:'Manrope';font-weight:600;font-size:${size*.42}px;color:${txtc};opacity:.6;margin-top:${size*.18}px">Устрема</div></div></div>`;
+  if(kind==='app')return `<div style="display:flex;gap:${size*.4}px;align-items:flex-end">${[1.9,1.2,.75].map(k=>`<div style="background:${P().ink};border-radius:${size*k*.24}px;padding:${size*k*.2}px;line-height:0">${markSVG(size*k,P().paper,P().signal)}</div>`).join('')}</div>`;
+  if(kind==='i')return `<div style="display:flex;align-items:flex-end;gap:${size*.02}px">${markSVG(size*.98,txtc,c2)}${wordmark('strema',size,txtc)}</div>`;
+  return row(wordmark('Ustrema',size,txtc));
+}
+function hex2rgb(h){h=h.replace('#','');return[0,2,4].map(i=>parseInt(h.substr(i,2),16))}
+function lum(h){return hex2rgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)}).reduce((a,v,i)=>a+v*[.2126,.7152,.0722][i],0)}
+function cr(a,b){const l1=lum(a),l2=lum(b);return (Math.max(l1,l2)+.05)/(Math.min(l1,l2)+.05)}
+function cmyk(h){let[r,g,b]=hex2rgb(h).map(v=>v/255);const k=1-Math.max(r,g,b);if(k===1)return'0 0 0 100';return[r,g,b].map(v=>Math.round((1-v-k)/(1-k)*100)).join(' ')+' '+Math.round(k*100)}
+function rails(w,h,n,c,cs,signalIdx=[2]){let s=`<svg width="100%" height="100%" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid slice">`;for(let i=0;i<n;i++){const x=i*((w+h)/n)-h;const col=signalIdx.includes(i)?cs:c;const sw=signalIdx.includes(i)?14:2;s+=`<line x1="${x}" y1="${h+20}" x2="${x+h+40}" y2="-20" stroke="${col}" stroke-width="${sw}" ${signalIdx.includes(i)?'':'opacity=".35"'}/>`}return s+'</svg>'}
+
+/* ================= THEME ================= */
+function applyTheme(){
+  const p=P(),r=document.documentElement.style;
+  ['ink','ink2','paper','signal','signalDeep','slate','mist','onSignal'].forEach(k=>r.setProperty('--'+k,p[k]));
+  const t=TYPES[S.type];r.setProperty('--display',t.display+',system-ui,sans-serif');r.setProperty('--text',t.text+',system-ui,sans-serif');
+  render();
+}
+function render(){
+  const p=P();
+  $('#navMark').innerHTML=markSVG(28,p.paper,p.signal);
+  $('#coverLockup').innerHTML=lockup('bi',96,p.paper,p.signal,p.paper);
+  $('#coverRails').innerHTML=rails(1400,900,14,p.paper,p.signal,[9]);
+  // logo
+  $('#logoStory').innerHTML=LOGOS[S.logo].story;
+  const board=(arr)=>arr.map(([n,v,why,fn])=>`<div class="xb"><div style="display:flex;align-items:center;gap:12px"><svg width="56" height="56" viewBox="0 0 64 64">${fn(p.paper,p.signal)}</svg>${wordmark('Ustrema',22,p.paper)}</div><div class="sizes">${[32,20,14].map(z=>`<svg width="${z}" height="${z}" viewBox="0 0 64 64">${fn(p.ink,p.signal)}</svg>`).join('')}</div><div style="font-size:13px"><span class="vtag ${v}">${{rec:'recommended',short:'shortlisted',park:'parked',rej:'rejected'}[v]}</span><b>${n}</b></div><small style="color:rgba(245,245,245,.6)">${why}</small></div>`).join('');
+  $('#explore7').innerHTML=board(EXPLORE7);
+  $('#prefBoard').innerHTML=['m04','m01','m03'].map(k=>`<div class="card" style="cursor:pointer;padding:0;overflow:hidden;outline:${S.logo===k||S.logo===k+'s'?'2px solid var(--signal)':'none'}" onclick="setLogo('${k}')"><div style="background:var(--paper);padding:26px;display:flex;justify-content:center">${markSVG(150,p.ink,p.signal,k)}</div><div style="background:var(--ink);padding:16px 20px;display:flex;align-items:center;gap:14px">${markSVG(40,p.paper,p.signal,k)}${wordmark('Ustrema',26,p.paper)}<span style="flex:1"></span>${markSVG(20,p.paper,p.signal,k)}${markSVG(14,p.paper,p.signal,k)}</div><div style="padding:14px 20px"><b>${LOGOS[k].name}</b></div></div>`).join('');$('#explore6').innerHTML=board(EXPLORE6);$('#explore5').innerHTML=board(EXPLORE5);$('#explore4').innerHTML=board(EXPLORE4);$('#explore3').innerHTML=board(EXPLORE3);$('#explore').innerHTML=board(EXPLORE);
+  $('#logoConcepts').innerHTML=Object.entries(LOGOS).map(([k,L])=>`<div class="card" style="cursor:pointer;outline:${k===S.logo?'2px solid var(--signal)':'none'}" onclick="setLogo('${k}')"><div style="display:flex;align-items:center;gap:16px;padding:18px 0">${markSVG(64,p.ink,p.signal,k)}${wordmark('Ustrema',28,p.ink)}</div><b>${L.name}</b></div>`).join('');
+  renderStage();
+  $('#logoSizes').innerHTML=[96,64,40,24,16].map(s=>`<div style="text-align:center">${markSVG(s,p.ink,p.signal)}<div class="mono" style="font-size:11px;color:var(--slate);margin-top:6px">${s}px</div></div>`).join('')+`<div style="text-align:center">${lockup('h',22,p.ink,p.signal,p.ink)}<div class="mono" style="font-size:11px;color:var(--slate);margin-top:6px">min lockup</div></div>`;
+  const mis=[['Recolour the mark (e.g. Microsoft blue)',lockup('h',30,'#0078D4','#0078D4',p.ink)],['Stretch / distort',`<div style="transform:scaleX(1.5)">${lockup('h',26,p.ink,p.signal,p.ink)}</div>`],['Add effects / shadows',`<div style="filter:drop-shadow(4px 4px 3px rgba(0,0,0,.5))">${lockup('h',30,p.ink,p.signal,p.ink)}</div>`],['Low contrast background',`<div style="background:${p.signal};padding:12px;border-radius:8px">${lockup('h',26,p.ink,p.signalDeep,p.signalDeep)}</div>`],['Rotate',`<div style="transform:rotate(-12deg)">${lockup('h',28,p.ink,p.signal,p.ink)}</div>`],['Different typeface',`<div style="display:flex;align-items:center;gap:10px">${markSVG(30,p.ink,p.signal)}<span style="font-family:Georgia,serif;font-size:30px;color:${p.ink}">Ustrema</span></div>`],['Slant or italicise the mark',`<div style="display:flex;align-items:center;gap:10px"><svg width="32" height="32" viewBox="0 0 64 64" style="overflow:visible"><g transform="translate(7 0) skewX(-14)">${LOGOS[S.logo].mark(p.ink,p.signal)}</g></svg>${wordmark('Ustrema',30,p.ink)}</div>`],['Add Microsoft logo/icons',`<div style="display:flex;align-items:center;gap:10px">${lockup('h',26,p.ink,p.signal,p.ink)}<svg width="24" height="24" viewBox="0 0 2 2"><rect width=".95" height=".95" fill="#F25022"/><rect x="1.05" width=".95" height=".95" fill="#7FBA00"/><rect y="1.05" width=".95" height=".95" fill="#00A4EF"/><rect x="1.05" y="1.05" width=".95" height=".95" fill="#FFB900"/></svg></div>`]];
+  $('#misuse').innerHTML=mis.map(([t,h])=>`<div class="card"><div class="misuse" style="height:90px;display:flex;align-items:center;justify-content:center;overflow:hidden">${h}</div><small>✕ ${t}</small></div>`).join('');
+  // colour
+  $('#palStory').innerHTML=p.story;
+  $('#palSeg').innerHTML=Object.entries(PALETTES).filter(([k,v])=>v.group!=='rejected'||k===S.pal).map(([k,v])=>`<button data-v="${k}" class="${k===S.pal?'on':''}" onclick="setPal('${k}')">${v.name}</button>`).join('');
+  const keys=['ink','signal','paper','slate','ink2','signalDeep','mist'].concat(p.second?['second']:[]);if(p.second&&!p.names.second)p.names.second='Ultraviolet (AI)';
+  $('#swatches').innerHTML=keys.map(k=>{const c=p[k];const tc=lum(c)>.35?p.ink:'#fff';return `<div class="sw" onclick="navigator.clipboard.writeText('${c}');toast('Copied ${c}')"><div class="chip" style="background:${c};color:${tc}">${p.names[k]}</div><div class="info">HEX ${c}<br>RGB ${hex2rgb(c).join(' ')}<br>CMYK ≈ ${cmyk(c)}<br><span style="color:var(--slate)">${{ink:'Primary · text, dark surfaces',signal:'Accent · CTA, logo chip, highlights',paper:'Background · default canvas',slate:'Secondary text, captions',ink2:'Cards on dark',signalDeep:'Signal text on light, hover',mist:'Borders, fills, pills',second:'Second signal: AI/agent topics only'}[k]}</span></div></div>`}).join('');
+  $('#ratio').innerHTML=[['ink',42,'#fff'],['paper',33,p.ink],['mist',10,p.ink],['slate',8,'#fff'],['signal',7,p.onSignal]].map(([k,w,t])=>`<div style="flex:${w};background:${p[k]};color:${t}">${p.names[k]} ${w}%</div>`).join('');
+  const pairs=[['ink','paper'],['ink','white'],['paper','ink'],['slate','paper'],['signal','paper'],['signalDeep','paper'],['signal','ink'],['white','signal'],['ink','signal'],['paper','ink2']];
+  const col=k=>k==='white'?'#FFFFFF':p[k], nm=k=>k==='white'?'White':p.names[k];
+  $('#contrast tbody').innerHTML=pairs.map(([f,b])=>{const r=cr(col(f),col(b));return `<tr><td>${nm(f)} on ${nm(b)}</td><td><span style="background:${col(b)};color:${col(f)};padding:6px 12px;border-radius:6px;font-weight:600;border:1px solid var(--mist)">Устрем Aa</span></td><td class="mono">${r.toFixed(2)}:1</td><td>${r>=4.5?'✅':'—'}</td><td>${r>=3?'✅':'❌'}</td></tr>`}).join('');
+  $('#states').innerHTML=[['Success','#1E8E5A'],['Warning','#E0A100'],['Error','#C62F2F'],['Info','#3A63C9']].map(([n,c])=>`<div style="display:flex;align-items:center;gap:8px"><i style="width:28px;height:28px;border-radius:7px;background:${c}"></i><span class="mono" style="font-size:12px">${n}<br>${c}</span></div>`).join('');
+  $('#dataviz').innerHTML=[p.ink,p.signal,p.second||p.slate,p.slate,'#F2B134','#E86A4A',p.mist].map(c=>`<div style="flex:1;height:56px;border-radius:8px;background:${c}" title="${c}"></div>`).join('');
+  $('#groupPalettes').innerHTML=SISTERS.map(([n,cs,d])=>`<div class="card"><b>${n}</b><div style="display:flex;gap:4px;margin:10px 0">${cs.map(c=>`<i style="flex:1;height:40px;border-radius:6px;background:${c};border:1px solid rgba(0,0,0,.08)"></i>`).join('')}</div><small>${d}</small></div>`).join('')+`<div class="card" style="outline:2px solid var(--signal)"><b>Ustrema · ${p.name.split('(')[0]}</b><div style="display:flex;gap:4px;margin:10px 0">${[p.ink,p.paper,p.signal,p.slate].map(c=>`<i style="flex:1;height:40px;border-radius:6px;background:${c};border:1px solid rgba(0,0,0,.08)"></i>`).join('')}</div><small>${{O:'✓ fuchsia is unused in the category',M:'✓ no hue at all: distinct by restraint',I:'⚠ violet-adjacent: AI-trend risk',P:'✓ cyan on plum is unused locally',X:'⚠ crimson is used by several local ERP houses',B:'⚠ blue is the category default',Y:'⚠ close to Power BI yellow',r1:'⚠ category default',r2:'⚠ near-black is common locally',r3:'⚠ mint is taken locally'}[S.pal]}</small></div>`;
+  // type
+  const t=TYPES[S.type];
+  $('#typeStory').textContent=t.story;$('#tDisp').innerHTML=t.disp;$('#tText').innerHTML=t.txt;
+  $('#typeSeg').innerHTML=Object.entries(TYPES).map(([k,v])=>`<button class="${k===S.type?'on':''}" onclick="setType('${k}')">${v.name}</button>`).join('');
+  const sc=[['Display XL',72,600,'Устрем с посока.'],['H1',56,600,'Momentum with direction.'],['H2',40,600,'Power Platform, governed.'],['H3',28,600,'Governance Scan — 2–3 weeks'],['H4',22,600,'Управление на средите'],['Body L',18,400,'We map every environment, maker and connector in your tenant.'],['Body',16,400,'Картографираме всяка среда, всеки създател и всеки конектор.'],['Caption',13,500,'AB-400 · AB-410 · PL-300 · SC-300']];
+  $('#scale').innerHTML=sc.map(([n,s,w,x])=>`<div class="scale-row"><span class="mono" style="font-size:11px;color:var(--slate)">${n}<br>${s}px / ${w}</span><span style="font-family:${s>=22?'var(--display)':'var(--text)'};font-size:${s}px;font-weight:${w};letter-spacing:${s>=28?'-.035em':'0'};line-height:1.15">${x}</span></div>`).join('');
+  // graphics
+  $('#railsDemo').innerHTML=rails(400,150,10,p.paper,p.signal,[6]);
+  const ic=[['Environment','<rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/>'],['Guardrail','<path d="M5 20L11 4M13 20L19 4"/><path d="M9 14l3-7" stroke="var(--signal)" stroke-width="2.4"/>'],['Policy / DLP','<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/>'],['Maker','<circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/>'],['Finding','<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/><path d="M11 8v3.5" stroke="var(--signal)"/>'],['Momentum','<path d="M4 18L10 6M10 18L16 6"/><path d="M16 18L22 6" stroke="var(--signal)" stroke-width="2.4"/>'],['Agent / AI','<rect x="5" y="7" width="14" height="11" rx="3"/><path d="M12 3v4M9 12h.01M15 12h.01"/>'],['Report','<path d="M6 3h9l4 4v14H6z"/><path d="M9 13h6M9 17h4"/>']];
+  $('#icons').innerHTML=ic.map(([n,d])=>`<div style="text-align:center;width:72px;color:${'var(--paper)'}"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="square">${d}</svg><div style="font-size:11px;opacity:.7;margin-top:4px">${n}</div></div>`).join('');
+  // apps
+  const lightMode=p.mode==='light';$('.browser').classList.toggle('dark',!lightMode);$('#mockLogo').innerHTML=lightMode?lockup('h',24,p.ink,p.signal,p.ink):lockup('h',24,p.paper,p.signal,p.paper);
+  $('#liBanner').innerHTML=`<div style="position:absolute;inset:0;opacity:.7">${rails(1584,396,16,p.paper,p.signal,[11])}</div><div style="position:absolute;left:5%;top:50%;transform:translateY(-50%)">${markSVG(70,p.paper,p.signal)}</div><div style="position:absolute;left:30%;top:50%;transform:translateY(-50%);color:${p.paper};font-family:var(--display);font-size:clamp(14px,2.2vw,30px);font-weight:600;letter-spacing:-.03em;line-height:1.1">Power Platform, governed.<br><span style="color:${p.signal}">Then built to scale.</span></div>`;
+  $('#bcFront').innerHTML=`<div style="position:absolute;inset:0;opacity:.6">${rails(850,550,10,p.paper,p.signal,[7])}</div><div style="position:absolute;left:16px;bottom:14px">${lockup('h',22,p.paper,p.signal,p.paper)}</div>`;
+  $('#bcBack').innerHTML=`<div style="font-family:var(--display);font-weight:600;font-size:16px;color:${p.ink}">Name Surname</div><div style="color:var(--slate)">Co-founder</div><div style="margin-top:18px;line-height:1.6;color:${p.ink}" class="mono">ustrema.com<br>Sofia · BG / EU</div><div style="margin-top:10px">${markSVG(18,p.ink,p.signal)}</div>`;
+  $('#sig').innerHTML=`<div style="display:flex;gap:14px;align-items:flex-start"><div>${markSVG(40,p.ink,p.signal)}</div><div style="border-left:2px solid var(--signal);padding-left:12px;line-height:1.5"><b style="font-family:var(--display);font-size:15px">Name Surname</b><br><span style="color:var(--slate)">Co-founder</span><br>ustrema.com · +359 ··· ··· ···<br><span class="mono" style="font-size:11px;color:var(--slate)">Ustrema (oo-STREH-mah) · Устрема ООД · Sofia</span></div></div>`;
+  $('#cover2').innerHTML=`<div style="position:absolute;right:-120px;top:0;bottom:0;width:34%;opacity:.9">${rails(500,400,7,p.ink,p.signal,[4])}</div><div style="position:relative">${lockup('h',18,p.ink,p.signal,p.ink)}<div style="margin-top:20%;font-family:var(--display);font-weight:600;font-size:clamp(16px,2vw,26px);letter-spacing:-.03em;max-width:60%;line-height:1.1">Power Platform Governance Scan</div><div class="mono" style="font-size:11px;color:var(--slate);margin-top:8px">Findings report · Client: [Sample] · Oct 2026 · Confidential</div></div>`;
+  // services
+  $('#offers').innerHTML=OFFERS.map(([l,n,d,t,pr,lead])=>`<div class="card" style="${lead?'outline:2px solid var(--signal)':''}"><span class="pill ${lead?'sig':''}">${l}</span>${lead?' <span class="pill">entry offer</span>':''}<h3 style="margin-top:10px">${n}</h3><p style="font-size:14px;opacity:.85">${d}</p><div class="mono" style="font-size:12px;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.1);padding-top:10px"><span>${t}</span><span>${pr}</span></div></div>`).join('');
+  renderWheel();renderScores();
+  renderMarket();
+}
+function renderStage(){
+  const p=P();const lk=$('#lockSeg .on').dataset.v, bg=$('#bgSeg .on').dataset.v, cs=$('#csSeg .on').dataset.v==='1';
+  const bgc={paper:p.paper,ink:p.ink,signal:p.signal,white:'#fff'}[bg];
+  const c1=bg==='ink'?p.paper:p.ink, c2=bg==='signal'?(bg==='signal'?p.ink:p.signal):p.signal, tc=bg==='ink'?p.paper:p.ink;
+  const st=$('#logoStage');st.style.background=bgc;st.style.border='1px solid '+(bg==='white'||bg==='paper'?'var(--mist)':'transparent');
+  st.innerHTML=`<div style="position:relative;${cs?'outline:1.5px dashed '+(bg==='ink'?'rgba(255,255,255,.5)':'rgba(22,26,51,.4)')+';outline-offset:22px':''}">${lockup(lk,64,c1,c2,tc)}</div>${cs?`<div style="position:absolute;bottom:12px;right:16px;font-family:var(--mono);font-size:11px;color:${tc};opacity:.7">dashed = minimum clear space (x)</div>`:''}`;
+}
+/* ================= SCORES ================= */
+function renderScores(){
+  const rows=Object.entries(PALETTES).map(([k,v])=>[k,v,psyScore(v)]).sort((x,y)=>(x[1].group===y[1].group?y[2]-x[2]:x[1].group==='rejected'?1:-1));
+  let rank=0;
+  $('#scoreTable').innerHTML=`<thead><tr><th>#</th><th>Scheme</th><th>Swatches</th>${PSY_DIMS.map(([d,n,w,h])=>`<th title="${h}">${n}<br><span style="opacity:.6">${Math.round(w*100)}%</span></th>`).join('')}<th>Fit /5</th></tr></thead><tbody>`+rows.map(([k,v,t])=>`<tr style="cursor:pointer;${k===S.pal?'outline:2px solid var(--signal);outline-offset:-2px;':''}${v.group==='rejected'?'opacity:.5;':''}" onclick="setPal('${k}')"><td class="mono">${v.group==='rejected'?'–':++rank}</td><td style="min-width:200px"><b>${v.name}</b><br><span class="pill">${v.strategy}</span> <small>${v.feel}</small></td><td><div style="display:flex;gap:3px">${[v.ink,v.paper,v.signal].map(c=>`<i style="width:20px;height:20px;border-radius:5px;background:${c};border:1px solid rgba(0,0,0,.12)"></i>`).join('')}</div></td>${PSY_DIMS.map(([d])=>`<td><div style="display:flex;gap:2px">${[1,2,3,4,5].map(n=>`<i style="width:8px;height:14px;border-radius:2px;background:${n<=Math.round(v.psy[d])?'var(--ink)':'var(--mist)'}"></i>`).join('')}</div></td>`).join('')}<td class="mono"><b>${t.toFixed(2)}</b></td></tr>`).join('')+'</tbody>';
+  const L=S.logo;$('#palMatrix').innerHTML=Object.entries(PALETTES).filter(([k,v])=>v.group!=='rejected').map(([k,v])=>`<div style="border-radius:14px;overflow:hidden;cursor:pointer;outline:${k===S.pal?'2px solid var(--signal)':'1px solid var(--mist)'}" onclick="setPal('${k}')"><div style="background:${v.ink};padding:20px;display:flex;align-items:center;gap:12px">${markSVG(44,v.paper,v.signal,L)}${wordmark('Ustrema',24,v.paper)}</div><div style="background:${v.paper};padding:14px 20px;display:flex;align-items:center;gap:10px">${markSVG(26,v.ink,k==='M'?v.ink:v.signalDeep,L)}<span style="background:${k==='M'?v.ink:v.signal};color:${k==='M'?v.paper:v.onSignal};font-weight:700;font-size:12px;padding:6px 10px;border-radius:8px;white-space:nowrap">Book a Scan</span><span style="color:${v.signalDeep};font-size:12px;font-weight:600">Read&nbsp;more&nbsp;→</span></div><div style="background:var(--white);padding:8px 14px;font-size:12px"><b>${k}</b> · ${v.feel}</div></div>`).join('');
+  // placement map
+  const W=560,H=380,pd=40,p=P();const X=x=>pd+x/10*(W-pd*2),Y=y=>H-pd-y/10*(H-pd*2);
+  let g=`<svg viewBox="0 0 ${W} ${H}" width="100%"><rect x="${pd}" y="${pd}" width="${W-2*pd}" height="${H-2*pd}" fill="none" stroke="${p.mist}"/><line x1="${X(5)}" y1="${pd}" x2="${X(5)}" y2="${H-pd}" stroke="${p.mist}"/><line x1="${pd}" y1="${Y(5)}" x2="${W-pd}" y2="${Y(5)}" stroke="${p.mist}"/>`;
+  [['Blue cluster · 50 colours',2.2,3.4,1.8,1.6,'#2F6FD8'],['Orange/red · 32',2.2,7.8,1.6,1.3,'#E8653A'],['Rose/crimson · 10',4.2,6.6,.9,.8,'#C9365E'],['Sky cyan · 8',3.6,4.6,.8,.7,'#3BB6E0'],['Local competitor mint',5.6,5.4,.5,.5,'#5CF0C9']].forEach(([n,x,y,rx,ry,c])=>{g+=`<ellipse cx="${X(x)}" cy="${Y(y)}" rx="${rx/10*(W-2*pd)}" ry="${ry/10*(H-2*pd)}" fill="${c}" opacity=".18" stroke="${c}" stroke-opacity=".5"/><text x="${X(x)}" y="${Y(y)+3}" text-anchor="middle" font-size="9.5" fill="${p.slate}">${n}</text>`});
+  Object.entries(PALETTES).filter(([k,v])=>v.group!=='rejected').forEach(([k,v])=>{const on=k===S.pal;g+=`<circle cx="${X(v.pos.x)}" cy="${Y(v.pos.y)}" r="${on?13:10}" fill="${v.signal}" stroke="${v.ink}" stroke-width="${on?3:1.5}" style="cursor:pointer" onclick="setPal('${k}')"/><text x="${X(v.pos.x)}" y="${Y(v.pos.y)+4}" text-anchor="middle" font-size="${on?12:10}" font-weight="800" fill="${v.onSignal}" style="pointer-events:none">${k}</text>`});
+  g+=`<text x="${W/2}" y="${H-12}" text-anchor="middle" font-size="11" fill="${p.slate}">conforming ← → distinctive</text><text x="14" y="${H/2}" text-anchor="middle" font-size="11" fill="${p.slate}" transform="rotate(-90 14 ${H/2})">calm / trust ← → energy</text><text x="${X(9.6)}" y="${Y(9.5)}" text-anchor="end" font-size="10" font-weight="700" fill="${p.signalDeep}">target zone</text></svg>`;
+  $('#placeMap').innerHTML=g;
+}
+/* ================= HUE WHEEL ================= */
+function renderWheel(){
+  const W=480,c=W/2,R=170,p=P();let g=`<svg viewBox="0 0 ${W} ${W}" width="100%" style="max-width:460px">`;
+  const bins={};HUES.forEach(h=>{const b=Math.floor(h.hue/20)*20;bins[b]=(bins[b]||0)+1});
+  const pol=(deg,r)=>[c+r*Math.cos((deg-90)*Math.PI/180),c+r*Math.sin((deg-90)*Math.PI/180)];
+  for(let b=0;b<360;b+=20){const n=bins[b]||0,r1=R+8,r2=R+8+n*1.1;const[a1,b1]=pol(b+1,r1),[a2,b2]=pol(b+19,r1),[a3,b3]=pol(b+19,r2),[a4,b4]=pol(b+1,r2);
+    g+=`<path d="M${a1} ${b1}A${r1} ${r1} 0 0 1 ${a2} ${b2}L${a3} ${b3}A${r2} ${r2} 0 0 0 ${a4} ${b4}Z" fill="hsl(${b+10} 70% 55%)" opacity=".85"><title>${b}–${b+19}°: ${n} competitor colours</title></path>`;
+    const[tx,ty]=pol(b+10,R-14);g+=`<text x="${tx}" y="${ty}" font-size="9" text-anchor="middle" fill="${p.slate}" font-family="var(--mono)">${n}</text>`}
+  g+=`<circle cx="${c}" cy="${c}" r="${R}" fill="none" stroke="${p.mist}"/><circle cx="${c}" cy="${c}" r="${R*.5}" fill="none" stroke="${p.mist}" stroke-dasharray="3 4"/>`;
+  HUES.forEach(h=>{const[x,y]=pol(h.hue,R*.25+R*.7*h.s);g+=`<circle cx="${x}" cy="${y}" r="4" fill="${h.hex}" stroke="#fff" stroke-width=".8"><title>${h.hex}</title></circle>`});
+  const seen={};Object.entries(PALETTES).forEach(([k,v])=>{const hb=Math.round(v.hue/10);seen[hb]=(seen[hb]||0)+1;const[x,y]=pol(v.hue+(seen[hb]-1)*9,R*.97);const on=k===S.pal;g+=`<circle cx="${x}" cy="${y}" r="${on?12:8}" fill="${v.signal}" stroke="${p.ink}" stroke-width="${on?3:1.5}"/><text x="${x}" y="${y+3.5}" text-anchor="middle" font-size="${on?10:8}" font-weight="700" fill="${v.onSignal}">${k}</text>`});
+  g+=`<text x="${c}" y="${c-4}" text-anchor="middle" font-size="13" font-weight="700" fill="${p.ink}" font-family="Manrope">135 colours</text><text x="${c}" y="${c+12}" text-anchor="middle" font-size="10" fill="${p.slate}">70 competitors</text></svg>`;
+  $('#hueWheel').innerHTML=g;
+}
+/* ================= MARKET ================= */
+let compFilter='All';
+function renderMarket(){
+  if(!COMPETITORS.length){$('#compGrid').innerHTML='<div class="card">Competitor data loading from research…</div>';return}
+  $('#marketKpis').innerHTML=MARKET_KPIS.map(([k,l])=>`<div class="card"><div class="kpi">${k}</div><small>${l}</small></div>`).join('');
+  const regs=['All',...new Set(COMPETITORS.map(c=>c.region))];
+  $('#compFilters').innerHTML=`<div class="seg">${regs.map(r=>`<button class="${r===compFilter?'on':''}" onclick="compFilter='${r}';renderMarket()">${r} ${r==='All'?'('+COMPETITORS.length+')':'('+COMPETITORS.filter(c=>c.region===r).length+')'}</button>`).join('')}</div>`;
+  $('#compGrid').innerHTML=COMPETITORS.filter(c=>compFilter==='All'||c.region===compFilter).map(c=>`<div class="card comp-card"><div class="top"><b style="font-family:var(--display);font-size:18px">${c.name}</b><span class="pill">${c.country}</span></div><a href="${c.url}" target="_blank" class="mono" style="font-size:12px;color:var(--slate)">${c.url.replace(/^https?:\/\//,'')}</a><div><small><b>Focus:</b> ${c.focus}</small></div>${c.hero?`<div style="font-family:var(--display);font-size:15px;border-left:3px solid var(--mist);padding-left:10px">“${c.hero}”</div>`:''}<div><small><b>Sells:</b> ${c.sells}</small></div><div><small><b>Public pricing:</b> ${c.price||'—'} · <b>Governance offer:</b> ${c.gov||'—'}</small></div><div><small><b>Look:</b> ${c.look}</small></div>${c.colors&&c.colors.length?`<div class="sw-row">${c.colors.map(x=>`<i style="background:${x}" title="${x}"></i>`).join('')}</div>`:''}<div><small><b>Gap for us:</b> ${c.gap}</small></div>${c.shot?`<a href="../02-market-research/screenshots/${c.shot}" target="_blank"><img src="../02-market-research/screenshots/${c.shot}" style="width:100%;border-radius:8px;border:1px solid var(--mist);margin-top:6px" loading="lazy" onerror="this.remove()"></a>`:''}</div>`).join('');
+  $('#patternTable tbody').innerHTML=PATTERNS.map(([a,b])=>`<tr><td>${a}</td><td><b>${b}</b></td></tr>`).join('');
+  // map
+  const W=900,H=440,pad=50;const p=P();
+  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%"><rect x="${pad}" y="${pad/2}" width="${W-pad*2}" height="${H-pad*1.5}" fill="none" stroke="${p.mist}"/><line x1="${W/2}" y1="${pad/2}" x2="${W/2}" y2="${H-pad}" stroke="${p.mist}"/><line x1="${pad}" y1="${(H-pad/2)/2+pad/4}" x2="${W-pad}" y2="${(H-pad/2)/2+pad/4}" stroke="${p.mist}"/>
+  <text x="${W-pad}" y="${H-14}" text-anchor="end" font-size="12" fill="${p.slate}">Build/implement only  ←  →  Governance + build</text>
+  <text x="18" y="${H/2}" text-anchor="middle" font-size="12" fill="${p.slate}" transform="rotate(-90 18 ${H/2})">Generalist / ERP-led  ←  →  Power Platform specialist</text>`;
+  COMPETITORS.forEach((c,i)=>{const x=pad+(c.x/10)*(W-pad*2),y=H-pad-(c.y/10)*(H-pad*1.5);const col=c.region==='Bulgaria'?p.ink:c.region==='Region'?p.slate:'#3BA99C';s+=`<circle cx="${x}" cy="${y}" r="7" fill="${col}" opacity=".85" data-i="${i}" class="dotc" style="cursor:pointer"/>${c.label?`<text x="${x+10}" y="${y+4}" font-size="11" fill="${p.ink}">${c.name}</text>`:''}`});
+  const ux=pad+.9*(W-pad*2),uy=H-pad-.8*(H-pad*1.5);s+=`<circle cx="${ux}" cy="${uy}" r="13" fill="${p.signal}"/><text x="${ux-18}" y="${uy+5}" text-anchor="end" font-size="14" font-weight="700" fill="${p.signalDeep}">Ustrema (target)</text>`;
+  s+=`<g font-size="11" fill="${p.slate}"><circle cx="${pad+5}" cy="${H-18}" r="5" fill="${p.ink}"/><text x="${pad+14}" y="${H-14}">Bulgaria</text><circle cx="${pad+80}" cy="${H-18}" r="5" fill="${p.slate}"/><text x="${pad+89}" y="${H-14}">Region</text><circle cx="${pad+145}" cy="${H-18}" r="5" fill="#3BA99C"/><text x="${pad+154}" y="${H-14}">International</text></g></svg>`;
+  $('#map').innerHTML=s;
+  $$('.dotc').forEach(d=>{d.onmousemove=e=>{const c=COMPETITORS[d.dataset.i];const t=$('#tip');t.innerHTML=`<b>${c.name}</b> · ${c.country}<br>${c.focus}<br><i>Governance offer: ${c.gov||'—'}</i>`;t.style.left=e.clientX+14+'px';t.style.top=e.clientY+14+'px';t.style.opacity=1};d.onmouseleave=()=>$('#tip').style.opacity=0});
+}
+/* ================= INTERACTIONS ================= */
+function setPal(k){S.pal=k;save();$('#palSel').value=k;applyTheme()}
+function setLogo(k){S.logo=k;save();$('#logoSel').value=k;render()}
+function setType(k){S.type=k;save();$('#typeSel').value=k;applyTheme()}
+function segInit(id,cb){$$(id+' button').forEach(b=>b.onclick=()=>{$$(id+' button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cb&&cb(b.dataset.v)})}
+
+
+function navInit(){
+  $('#navLinks').innerHTML=$$('section[data-title]').map(s=>`<a href="#${s.id}" data-id="${s.id}"><span>${s.dataset.title}</span></a>`).join('');
+}
+function init(){
+  $('#palSel').innerHTML=`<optgroup label="Proposals">${Object.entries(PALETTES).filter(([k,v])=>v.group!=='rejected').map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('')}</optgroup><optgroup label="Rejected (reference)">${Object.entries(PALETTES).filter(([k,v])=>v.group==='rejected').map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('')}</optgroup>`;$('#palSel').value=S.pal;$('#palSel').onchange=e=>setPal(e.target.value);
+  $('#logoSel').innerHTML=Object.entries(LOGOS).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('');$('#logoSel').value=S.logo;$('#logoSel').onchange=e=>setLogo(e.target.value);
+  $('#typeSel').innerHTML=Object.entries(TYPES).map(([k,v])=>`<option value="${k}">${v.name}</option>`).join('');$('#typeSel').value=S.type;$('#typeSel').onchange=e=>setType(e.target.value);
+  segInit('#lockSeg',renderStage);segInit('#bgSeg',renderStage);segInit('#csSeg',renderStage);
+  segInit('#typeLang',v=>{$('#tester').textContent=v==='bg'?'Устрем с посока. Държава, вдъхновение, джоб.':'Momentum with direction.';$('#tester').lang=v==='bg'?'bg':'en'});
+  segInit('#voiceLang',v=>renderVoice(v));renderVoice('en');
+  $('#dials').innerHTML=DIALS.map(([a,b,v])=>`<div style="display:grid;grid-template-columns:110px 1fr 110px;gap:14px;align-items:center;margin:10px 0;max-width:640px"><small style="text-align:right">${a}</small><div style="height:6px;background:var(--mist);border-radius:9px;position:relative"><i style="position:absolute;left:${v}%;top:-5px;width:16px;height:16px;border-radius:50%;background:var(--signal);transform:translateX(-50%)"></i></div><small>${b}</small></div>`).join('');
+  renderTaglines();
+  $('#sayBtn').onclick=()=>{const u=new SpeechSynthesisUtterance('Устрема');const v=speechSynthesis.getVoices().find(v=>v.lang.startsWith('bg'));if(v){u.voice=v;u.lang='bg-BG'}else{u.text='oo strem ah';u.lang='en-GB'}u.rate=.85;speechSynthesis.speak(u)};
+  navInit();applyTheme();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$('#navLinks a').forEach(a=>a.classList.toggle('on',a.dataset.id===e.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
+  $$('section[data-title]').forEach(s=>io.observe(s));
+}
+function renderVoice(l){$('#voicePairs').innerHTML=VOICE[l].map(([d,o])=>`<div class="dont"><b>Not this</b><p style="margin:.4em 0 0">${d}</p></div><div class="do"><b>This</b><p style="margin:.4em 0 0">${o}</p></div>`).join('')}
+function renderTaglines(){$('#taglines').innerHTML=TAGLINES.map(([e,b,n],i)=>`<div class="vote ${i===0?'on':''}" style="cursor:default"><div><div class="en">${e}</div><div class="bg">${b}</div></div><small style="margin-left:24px">${n}</small>${i===0?'<span class="star">★</span>':''}</div>`).join('')}
+</script>
+<script>
+/* ===== Research data (generated from 02-market-research) ===== */
+/*RESEARCH_DATA_START*/
+HUES=[{"n": "", "hex": "#ED7C00", "hue": 31, "s": 1.0, "l": 0.46}, {"n": "", "hex": "#EC7B00", "hue": 31, "s": 1.0, "l": 0.46}, {"n": "", "hex": "#F6941E", "hue": 33, "s": 0.92, "l": 0.54}, {"n": "", "hex": "#5CF0C9", "hue": 164, "s": 0.83, "l": 0.65}, {"n": "", "hex": "#FF9A4D", "hue": 26, "s": 1.0, "l": 0.65}, {"n": "", "hex": "#116DFF", "hue": 217, "s": 1.0, "l": 0.53}, {"n": "", "hex": "#077C8D", "hue": 188, "s": 0.91, "l": 0.29}, {"n": "", "hex": "#FF1962", "hue": 341, "s": 1.0, "l": 0.55}, {"n": "", "hex": "#215B92", "hue": 209, "s": 0.63, "l": 0.35}, {"n": "", "hex": "#F7A242", "hue": 32, "s": 0.92, "l": 0.61}, {"n": "", "hex": "#CC171E", "hue": 358, "s": 0.8, "l": 0.45}, {"n": "", "hex": "#1F77ED", "hue": 214, "s": 0.85, "l": 0.53}, {"n": "", "hex": "#2563EB", "hue": 221, "s": 0.83, "l": 0.53}, {"n": "", "hex": "#E91E63", "hue": 340, "s": 0.82, "l": 0.52}, {"n": "", "hex": "#F15A24", "hue": 16, "s": 0.88, "l": 0.54}, {"n": "", "hex": "#EA8730", "hue": 28, "s": 0.82, "l": 0.55}, {"n": "", "hex": "#1E87F0", "hue": 210, "s": 0.88, "l": 0.53}, {"n": "", "hex": "#61A229", "hue": 92, "s": 0.6, "l": 0.4}, {"n": "", "hex": "#EF7F1A", "hue": 28, "s": 0.87, "l": 0.52}, {"n": "", "hex": "#0E2D64", "hue": 218, "s": 0.75, "l": 0.22}, {"n": "", "hex": "#67A325", "hue": 89, "s": 0.63, "l": 0.39}, {"n": "", "hex": "#112057", "hue": 227, "s": 0.67, "l": 0.2}, {"n": "", "hex": "#FF6900", "hue": 25, "s": 1.0, "l": 0.5}, {"n": "", "hex": "#92C1FC", "hue": 213, "s": 0.95, "l": 0.78}, {"n": "", "hex": "#A6192E", "hue": 351, "s": 0.74, "l": 0.37}, {"n": "", "hex": "#005CD9", "hue": 215, "s": 1.0, "l": 0.43}, {"n": "", "hex": "#EE9982", "hue": 13, "s": 0.76, "l": 0.72}, {"n": "", "hex": "#4D3DB9", "hue": 248, "s": 0.5, "l": 0.48}, {"n": "", "hex": "#82142B", "hue": 347, "s": 0.73, "l": 0.29}, {"n": "", "hex": "#2A9DC4", "hue": 195, "s": 0.65, "l": 0.47}, {"n": "", "hex": "#C69C6D", "hue": 32, "s": 0.44, "l": 0.6}, {"n": "", "hex": "#F56955", "hue": 7, "s": 0.89, "l": 0.65}, {"n": "", "hex": "#F6891F", "hue": 30, "s": 0.92, "l": 0.54}, {"n": "", "hex": "#5629C8", "hue": 257, "s": 0.66, "l": 0.47}, {"n": "", "hex": "#006AE7", "hue": 212, "s": 1.0, "l": 0.45}, {"n": "", "hex": "#C70D45", "hue": 342, "s": 0.88, "l": 0.42}, {"n": "", "hex": "#65BC7B", "hue": 135, "s": 0.39, "l": 0.57}, {"n": "", "hex": "#305594", "hue": 218, "s": 0.51, "l": 0.38}, {"n": "", "hex": "#64C6F2", "hue": 199, "s": 0.85, "l": 0.67}, {"n": "", "hex": "#082773", "hue": 223, "s": 0.87, "l": 0.24}, {"n": "", "hex": "#0055D1", "hue": 216, "s": 1.0, "l": 0.41}, {"n": "", "hex": "#14B1E7", "hue": 195, "s": 0.84, "l": 0.49}, {"n": "", "hex": "#CC0000", "hue": 0, "s": 1.0, "l": 0.4}, {"n": "", "hex": "#2F60B0", "hue": 217, "s": 0.58, "l": 0.44}, {"n": "", "hex": "#007EFC", "hue": 210, "s": 1.0, "l": 0.49}, {"n": "", "hex": "#0E2A6D", "hue": 222, "s": 0.77, "l": 0.24}, {"n": "", "hex": "#C22969", "hue": 335, "s": 0.65, "l": 0.46}, {"n": "", "hex": "#112057", "hue": 227, "s": 0.67, "l": 0.2}, {"n": "", "hex": "#92C1FC", "hue": 213, "s": 0.95, "l": 0.78}, {"n": "", "hex": "#FF6900", "hue": 25, "s": 1.0, "l": 0.5}, {"n": "", "hex": "#467FF7", "hue": 221, "s": 0.92, "l": 0.62}, {"n": "", "hex": "#4054B2", "hue": 229, "s": 0.47, "l": 0.47}, {"n": "", "hex": "#FFAB00", "hue": 40, "s": 1.0, "l": 0.5}, {"n": "", "hex": "#FE3A02", "hue": 13, "s": 0.99, "l": 0.5}, {"n": "", "hex": "#00B3A0", "hue": 174, "s": 1.0, "l": 0.35}, {"n": "", "hex": "#BFA163", "hue": 40, "s": 0.42, "l": 0.57}, {"n": "", "hex": "#D9622B", "hue": 19, "s": 0.7, "l": 0.51}, {"n": "", "hex": "#172375", "hue": 232, "s": 0.67, "l": 0.27}, {"n": "", "hex": "#3273FB", "hue": 221, "s": 0.96, "l": 0.59}, {"n": "", "hex": "#1863DC", "hue": 217, "s": 0.8, "l": 0.48}, {"n": "", "hex": "#003D70", "hue": 207, "s": 1.0, "l": 0.22}, {"n": "", "hex": "#3CA148", "hue": 127, "s": 0.46, "l": 0.43}, {"n": "", "hex": "#4A9CD5", "hue": 205, "s": 0.62, "l": 0.56}, {"n": "", "hex": "#F49900", "hue": 38, "s": 1.0, "l": 0.48}, {"n": "", "hex": "#F6921E", "hue": 32, "s": 0.92, "l": 0.54}, {"n": "", "hex": "#BE3932", "hue": 3, "s": 0.58, "l": 0.47}, {"n": "", "hex": "#782A28", "hue": 1, "s": 0.5, "l": 0.31}, {"n": "", "hex": "#FF0000", "hue": 0, "s": 1.0, "l": 0.5}, {"n": "", "hex": "#F6C453", "hue": 42, "s": 0.9, "l": 0.65}, {"n": "", "hex": "#35E85A", "hue": 132, "s": 0.8, "l": 0.56}, {"n": "", "hex": "#A03033", "hue": 358, "s": 0.54, "l": 0.41}, {"n": "", "hex": "#E30052", "hue": 338, "s": 1.0, "l": 0.45}, {"n": "", "hex": "#DD665E", "hue": 4, "s": 0.65, "l": 0.62}, {"n": "", "hex": "#0C4DA2", "hue": 214, "s": 0.86, "l": 0.34}, {"n": "", "hex": "#2CA0DA", "hue": 200, "s": 0.7, "l": 0.51}, {"n": "", "hex": "#0C4DA2", "hue": 214, "s": 0.86, "l": 0.34}, {"n": "", "hex": "#FDC446", "hue": 41, "s": 0.98, "l": 0.63}, {"n": "", "hex": "#4AAAAB", "hue": 181, "s": 0.4, "l": 0.48}, {"n": "", "hex": "#11397B", "hue": 217, "s": 0.76, "l": 0.27}, {"n": "", "hex": "#F93542", "hue": 356, "s": 0.94, "l": 0.59}, {"n": "", "hex": "#FDB813", "hue": 42, "s": 0.98, "l": 0.53}, {"n": "", "hex": "#EF2C3D", "hue": 355, "s": 0.86, "l": 0.55}, {"n": "", "hex": "#1BB0D0", "hue": 191, "s": 0.77, "l": 0.46}, {"n": "", "hex": "#F7695E", "hue": 4, "s": 0.91, "l": 0.67}, {"n": "", "hex": "#17AF92", "hue": 169, "s": 0.77, "l": 0.39}, {"n": "", "hex": "#1890D7", "hue": 202, "s": 0.8, "l": 0.47}, {"n": "", "hex": "#FFB81C", "hue": 41, "s": 1.0, "l": 0.55}, {"n": "", "hex": "#2052CB", "hue": 222, "s": 0.73, "l": 0.46}, {"n": "", "hex": "#0078D4", "hue": 206, "s": 1.0, "l": 0.42}, {"n": "", "hex": "#9F1459", "hue": 330, "s": 0.78, "l": 0.35}, {"n": "", "hex": "#9C6CFE", "hue": 260, "s": 0.99, "l": 0.71}, {"n": "", "hex": "#742774", "hue": 300, "s": 0.5, "l": 0.3}, {"n": "", "hex": "#2B5672", "hue": 204, "s": 0.45, "l": 0.31}, {"n": "", "hex": "#0A66C2", "hue": 210, "s": 0.9, "l": 0.4}, {"n": "", "hex": "#00E6C3", "hue": 171, "s": 1.0, "l": 0.45}, {"n": "", "hex": "#4686CC", "hue": 211, "s": 0.57, "l": 0.54}, {"n": "", "hex": "#70C1B3", "hue": 170, "s": 0.4, "l": 0.6}, {"n": "", "hex": "#F7D032", "hue": 48, "s": 0.92, "l": 0.58}, {"n": "", "hex": "#14F2AF", "hue": 162, "s": 0.9, "l": 0.51}, {"n": "", "hex": "#008CFF", "hue": 207, "s": 1.0, "l": 0.5}, {"n": "", "hex": "#2563EB", "hue": 221, "s": 0.83, "l": 0.53}, {"n": "", "hex": "#ED7C00", "hue": 31, "s": 1.0, "l": 0.46}, {"n": "", "hex": "#F7941E", "hue": 33, "s": 0.93, "l": 0.54}, {"n": "", "hex": "#EC7B00", "hue": 31, "s": 1.0, "l": 0.46}, {"n": "", "hex": "#0095D6", "hue": 198, "s": 1.0, "l": 0.42}, {"n": "", "hex": "#92C1FC", "hue": 213, "s": 0.95, "l": 0.78}, {"n": "", "hex": "#3A3AD6", "hue": 240, "s": 0.66, "l": 0.53}, {"n": "", "hex": "#FF6900", "hue": 25, "s": 1.0, "l": 0.5}, {"n": "", "hex": "#112057", "hue": 227, "s": 0.67, "l": 0.2}, {"n": "", "hex": "#FF6A00", "hue": 25, "s": 1.0, "l": 0.5}, {"n": "", "hex": "#BCD041", "hue": 68, "s": 0.6, "l": 0.54}, {"n": "", "hex": "#305594", "hue": 218, "s": 0.51, "l": 0.38}, {"n": "", "hex": "#163B6E", "hue": 215, "s": 0.67, "l": 0.26}, {"n": "", "hex": "#165FFD", "hue": 221, "s": 0.98, "l": 0.54}, {"n": "", "hex": "#DD2C00", "hue": 12, "s": 1.0, "l": 0.43}, {"n": "", "hex": "#200F60", "hue": 253, "s": 0.73, "l": 0.22}, {"n": "", "hex": "#4423FF", "hue": 249, "s": 1.0, "l": 0.57}, {"n": "", "hex": "#7A8FFF", "hue": 231, "s": 1.0, "l": 0.74}, {"n": "", "hex": "#0064FF", "hue": 216, "s": 1.0, "l": 0.5}, {"n": "", "hex": "#FF4D5E", "hue": 354, "s": 1.0, "l": 0.65}, {"n": "", "hex": "#A0BFDE", "hue": 210, "s": 0.48, "l": 0.75}, {"n": "", "hex": "#079FC3", "hue": 191, "s": 0.93, "l": 0.4}, {"n": "", "hex": "#F3745B", "hue": 10, "s": 0.86, "l": 0.65}, {"n": "", "hex": "#126BAF", "hue": 206, "s": 0.81, "l": 0.38}, {"n": "", "hex": "#0076BE", "hue": 203, "s": 1.0, "l": 0.37}, {"n": "", "hex": "#8B2B8B", "hue": 300, "s": 0.53, "l": 0.36}, {"n": "", "hex": "#18B9B2", "hue": 177, "s": 0.77, "l": 0.41}, {"n": "", "hex": "#0796DE", "hue": 200, "s": 0.94, "l": 0.45}, {"n": "", "hex": "#00568A", "hue": 203, "s": 1.0, "l": 0.27}, {"n": "", "hex": "#7215C9", "hue": 271, "s": 0.81, "l": 0.44}, {"n": "", "hex": "#7015C9", "hue": 270, "s": 0.81, "l": 0.44}, {"n": "", "hex": "#FFDF00", "hue": 52, "s": 1.0, "l": 0.5}, {"n": "", "hex": "#FF370F", "hue": 10, "s": 1.0, "l": 0.53}, {"n": "", "hex": "#742774", "hue": 300, "s": 0.5, "l": 0.3}, {"n": "", "hex": "#3078BE", "hue": 210, "s": 0.6, "l": 0.47}];
+COMPETITORS=[];
+MARKET_KPIS=[["0", "Bulgarian firms selling Power Platform governance / CoE / Copilot readiness as a named service (27 profiled)"], ["0 / 20", "competitor websites publishing prices (teardown). only 3 Bulgarian firms publish any"], ["11 / 20", "sites built on navy / Microsoft blue + orange or red buttons"], ["2", "regional firms with any Power Platform governance page (Hungary, Czechia), neither priced"]];
+PATTERNS=[["Lead with ERP / Dynamics + BG tax localisation; Power Platform is a sub-menu", "Lead with Power Platform governance. Dynamics is an extension line, not the identity"], ["No packaged, priced entry offer: \"Contact us\" everywhere", "Fixed-scope Governance Scan, plus a quick Licence Check"], ["Still selling \"CoE Starter Kit install\" (Kit unmaintained since May 2026)", "Post-Kit governance: native admin center, Managed Environments, Agent 365, Purview"], ["English-only specialist boutiques; thin Bulgarian content", "Bulgarian-first content, natively written, with an EN mirror"], ["Microsoft badge as hero; \"Gold Partner\" (retired 2022) still shown", "Badge-less credentials: named people + exam codes; badge in footer once earned"], ["Navy/blue + orange, Montserrat / Segoe / Open Sans, stock people, network nodes", "Paper-dominant canvas, Cyrillic-first type, finding-card visuals, rails motif"], ["Consolidation: Musala→Avenga, Crayon→SoftwareOne, Barhead/Velrada/PowerApps911 acquired", "Independent, senior, local boutique"], ["Copilot pages that end in a contact form", "Copilot & Agent Readiness with scope, duration, deliverables"], ["Readiness quizzes (Pargesoft, Bulb Digital) are the best lead magnets, none in Bulgarian", "Bulgarian \"Power Platform governance score\" self-check as a lead magnet (phase 2)"]];
+/*RESEARCH_DATA_END*/
+renderMarket=function(){$('#marketKpis').innerHTML=MARKET_KPIS.map(([k,l])=>`<div class="card"><div class="kpi">${k}</div><small>${l}</small></div>`).join('');$('#patternTable tbody').innerHTML=PATTERNS.map(([a,b])=>`<tr><td>${a}</td><td><b>${b}</b></td></tr>`).join('')};
+init();
+</script>
+</body>
+</html>
