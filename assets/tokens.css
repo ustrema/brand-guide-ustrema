@@ -1,13 +1,12 @@
-/* Ustrema design tokens — v8 draft (palette O · Ink, Bone & Signal Fuchsia; preferred marks 04 / 01 / 03; type Manrope + Onest).
-   All schemes: see guide §08 (palettes unchanged since v4). Source of truth: ../ustrema-brand-guide.html. */
+/* Ustrema design tokens — v10 (core theme: Ink #1D1429, Cream #F4F1EC, Magenta #E847C9; logo 5A Twin Current). */
 :root{
-  --u-ink:#121016; --u-ink-2:#1F1B26; --u-bone:#F4F1EC; --u-white:#FFFFFF;
-  --u-signal:#E847C9;       /* fuchsia accent: CTA fills, logo arrow, one highlight per view — never long text, never gradients */
-  --u-signal-deep:#B01E95;  /* fuchsia text/links on Bone (5.4:1) */
-  --u-on-signal:#121016;    /* text on Signal fills (5.6:1) */
-  --u-stone:#625D6B; --u-mist:#E6E1E8;
+  --u-ink:#1D1429; --u-ink-2:#2A1F3A; --u-cream:#F4F1EC; --u-white:#FFFFFF;
+  --u-magenta:#E847C9; --u-signal:#E847C9;       /* fuchsia accent: CTA fills, logo arrow, one highlight per view — never long text, never gradients */
+  --u-signal-deep:#B01E95;  /* magenta text/links on Cream (5.4:1) */
+  --u-on-signal:#1D1429;    /* text on Magenta fills (5.2:1) */
+  --u-dusk:#655C70; --u-mist:#E6E0E6;
   --u-success:#1E8E5A; --u-warning:#E0A100; --u-error:#C62F2F; --u-info:#3A63C9;
-  --u-dv-1:#121016; --u-dv-2:#E847C9; --u-dv-3:#625D6B; --u-dv-4:#F2B134; --u-dv-5:#3BA99C; --u-dv-6:#8C6BD9;
+  --u-dv-1:#1D1429; --u-dv-2:#E847C9; --u-dv-3:#625D6B; --u-dv-4:#F2B134; --u-dv-5:#3BA99C; --u-dv-6:#8C6BD9;
   --u-font-wordmark:'Manrope',sans-serif; --u-font-display:'Manrope',system-ui,sans-serif; --u-font-text:'Onest',system-ui,sans-serif; --u-font-mono:'JetBrains Mono',ui-monospace,monospace;
   --u-fs-display:72px; --u-fs-h1:56px; --u-fs-h2:40px; --u-fs-h3:28px; --u-fs-h4:22px; --u-fs-body-l:18px; --u-fs-body:16px; --u-fs-caption:13px;
   --u-tracking-display:-0.04em; --u-tracking-heading:-0.03em; --u-lh-body:1.55; --u-lh-heading:1.08;
